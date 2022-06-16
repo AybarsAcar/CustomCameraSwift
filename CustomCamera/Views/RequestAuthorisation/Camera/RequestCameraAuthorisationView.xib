@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RequestCameraAuthorisationView" customModule="CustomCamera" customModuleProvider="target">
             <connections>
                 <outlet property="actionButton" destination="llf-u5-Euv" id="JdK-ut-UC6"/>
+                <outlet property="actionButtonWidthConstraint" destination="kaG-Rm-si7" id="qTX-eC-uhm"/>
                 <outlet property="cameraImageView" destination="OQG-7S-8ft" id="HEJ-XW-tQ1"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="SSh-7v-RF5"/>
                 <outlet property="messageLabel" destination="6rV-50-mDD" id="fNn-1i-tYU"/>

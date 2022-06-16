@@ -18,6 +18,9 @@
 		00F8BB0D285733E300C5FF8F /* RequestCameraAuthorisationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F8BB0C285733E300C5FF8F /* RequestCameraAuthorisationView.swift */; };
 		00F8BB0F2857340D00C5FF8F /* RequestCameraAuthorisationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F8BB0E2857340D00C5FF8F /* RequestCameraAuthorisationView.xib */; };
 		00F8BB1428573A7A00C5FF8F /* CameraAuthorisationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F8BB1328573A7A00C5FF8F /* CameraAuthorisationManager.swift */; };
+		00F8BB1728574D2F00C5FF8F /* RequestMicrophoneAuthorisationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F8BB1628574D2F00C5FF8F /* RequestMicrophoneAuthorisationView.swift */; };
+		00F8BB1928574D4800C5FF8F /* RequestMicrophoneAuthorisationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F8BB1828574D4800C5FF8F /* RequestMicrophoneAuthorisationView.xib */; };
+		00F8BB1C2857501700C5FF8F /* MicrophoneAuthorisationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F8BB1B2857501700C5FF8F /* MicrophoneAuthorisationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,9 @@
 		00F8BB0C285733E300C5FF8F /* RequestCameraAuthorisationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCameraAuthorisationView.swift; sourceTree = "<group>"; };
 		00F8BB0E2857340D00C5FF8F /* RequestCameraAuthorisationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RequestCameraAuthorisationView.xib; sourceTree = "<group>"; };
 		00F8BB1328573A7A00C5FF8F /* CameraAuthorisationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraAuthorisationManager.swift; sourceTree = "<group>"; };
+		00F8BB1628574D2F00C5FF8F /* RequestMicrophoneAuthorisationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMicrophoneAuthorisationView.swift; sourceTree = "<group>"; };
+		00F8BB1828574D4800C5FF8F /* RequestMicrophoneAuthorisationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RequestMicrophoneAuthorisationView.xib; sourceTree = "<group>"; };
+		00F8BB1B2857501700C5FF8F /* MicrophoneAuthorisationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicrophoneAuthorisationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +122,7 @@
 		00F8BB0A285733B900C5FF8F /* RequestAuthorisation */ = {
 			isa = PBXGroup;
 			children = (
+				00F8BB1528574D1400C5FF8F /* Microphone */,
 				00F8BB0B285733C100C5FF8F /* Camera */,
 			);
 			path = RequestAuthorisation;
@@ -141,6 +148,7 @@
 		00F8BB1128573A5E00C5FF8F /* RequestAuthorisation */ = {
 			isa = PBXGroup;
 			children = (
+				00F8BB1A2857500600C5FF8F /* Microphone */,
 				00F8BB1228573A6700C5FF8F /* Camera */,
 			);
 			path = RequestAuthorisation;
@@ -152,6 +160,23 @@
 				00F8BB1328573A7A00C5FF8F /* CameraAuthorisationManager.swift */,
 			);
 			path = Camera;
+			sourceTree = "<group>";
+		};
+		00F8BB1528574D1400C5FF8F /* Microphone */ = {
+			isa = PBXGroup;
+			children = (
+				00F8BB1628574D2F00C5FF8F /* RequestMicrophoneAuthorisationView.swift */,
+				00F8BB1828574D4800C5FF8F /* RequestMicrophoneAuthorisationView.xib */,
+			);
+			path = Microphone;
+			sourceTree = "<group>";
+		};
+		00F8BB1A2857500600C5FF8F /* Microphone */ = {
+			isa = PBXGroup;
+			children = (
+				00F8BB1B2857501700C5FF8F /* MicrophoneAuthorisationManager.swift */,
+			);
+			path = Microphone;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,6 +240,7 @@
 				00F8BAFB2857323E00C5FF8F /* LaunchScreen.storyboard in Resources */,
 				00F8BAF82857323E00C5FF8F /* Assets.xcassets in Resources */,
 				00F8BB0F2857340D00C5FF8F /* RequestCameraAuthorisationView.xib in Resources */,
+				00F8BB1928574D4800C5FF8F /* RequestMicrophoneAuthorisationView.xib in Resources */,
 				00F8BAF62857323D00C5FF8F /* Main.storyboard in Resources */,
 				00F8BB08285732DD00C5FF8F /* LaunchViewController.xib in Resources */,
 			);
@@ -227,12 +253,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00F8BB1C2857501700C5FF8F /* MicrophoneAuthorisationManager.swift in Sources */,
 				00F8BAF32857323D00C5FF8F /* ViewController.swift in Sources */,
 				00F8BB0D285733E300C5FF8F /* RequestCameraAuthorisationView.swift in Sources */,
 				00F8BAEF2857323D00C5FF8F /* AppDelegate.swift in Sources */,
 				00F8BAF12857323D00C5FF8F /* SceneDelegate.swift in Sources */,
 				00F8BB07285732DD00C5FF8F /* LaunchViewController.swift in Sources */,
 				00F8BB1428573A7A00C5FF8F /* CameraAuthorisationManager.swift in Sources */,
+				00F8BB1728574D2F00C5FF8F /* RequestMicrophoneAuthorisationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

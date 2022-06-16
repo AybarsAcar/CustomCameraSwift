@@ -8,14 +8,15 @@
 import Foundation
 import AVFoundation
 
-enum CamearAuthorisationStatus {
+enum CameraAuthorisationStatus {
   case granted, notRequested, unauthorised
 }
 
-typealias RequestCameraAuthorisationCompletionHandler = (CamearAuthorisationStatus) -> Void
+typealias RequestCameraAuthorisationCompletionHandler = (_ status: CameraAuthorisationStatus) -> Void
 
 final class CameraAuthorisationManager {
   static let shared = CameraAuthorisationManager()
+  private init() { }
   
   func requestCameraAuthorisation(completion: @escaping RequestCameraAuthorisationCompletionHandler) {
     
@@ -34,7 +35,7 @@ final class CameraAuthorisationManager {
     
   }
   
-  func getCameraAuthorisationStatus() -> CamearAuthorisationStatus {
+  func getCameraAuthorisationStatus() -> CameraAuthorisationStatus {
     let status = AVCaptureDevice.authorizationStatus(for: .video)
     
     switch status {

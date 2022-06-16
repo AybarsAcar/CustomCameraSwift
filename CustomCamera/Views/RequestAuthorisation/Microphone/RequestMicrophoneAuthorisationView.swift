@@ -1,5 +1,5 @@
 //
-//  RequestCameraAuthorisationView.swift
+//  RequestMicrophoneAuthorisationView.swift
 //  CustomCamera
 //
 //  Created by Aybars Acar on 13/6/2022.
@@ -7,22 +7,21 @@
 
 import UIKit
 
-protocol RequestCameraAuthorisationViewDelegate: AnyObject {
-  func requestCameraAuthorisationTapped()
+protocol RequestMicrophoneAuthorisationViewDelegate: AnyObject {
+  func requestMicrophoneAuthorisationTapped()
 }
 
-/// this will be our view that we display when requesting authorisation
-final class RequestCameraAuthorisationView: UIView {
-  
+class RequestMicrophoneAuthorisationView: UIView {
+
   @IBOutlet private weak var contentView: UIView!
   
-  @IBOutlet private weak var cameraImageView: UIImageView!
+  @IBOutlet private weak var microphoneImageView: UIImageView!
   @IBOutlet private weak var titleLabel: UILabel!
   @IBOutlet private weak var messageLabel: UILabel!
   @IBOutlet private weak var actionButton: UIButton!
   @IBOutlet private weak var actionButtonWidthConstraint: NSLayoutConstraint!
   
-  weak var delegate: RequestCameraAuthorisationViewDelegate?
+  weak var delegate: RequestMicrophoneAuthorisationViewDelegate?
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -51,7 +50,7 @@ final class RequestCameraAuthorisationView: UIView {
   }
   
   @IBAction func actionButtonHandler(button: UIButton) {
-    delegate?.requestCameraAuthorisationTapped()
+    delegate?.requestMicrophoneAuthorisationTapped()
   }
   
   private func addActionButtonShadowAndCornerRadius() {
@@ -65,14 +64,14 @@ final class RequestCameraAuthorisationView: UIView {
   }
   
   func animateInViews() {
-    cameraImageView.alpha = 0
+    microphoneImageView.alpha = 0
     titleLabel.alpha = 0
     messageLabel.alpha = 0
     actionButton.alpha = 0
     
-    animateInView(view: cameraImageView)
+    animateInView(view: microphoneImageView)
     
-    let viewsToAnimate = [cameraImageView, titleLabel, messageLabel, actionButton]
+    let viewsToAnimate = [microphoneImageView, titleLabel, messageLabel, actionButton]
     
     for (i, viewToAnimate) in viewsToAnimate.enumerated() {
       
@@ -84,7 +83,7 @@ final class RequestCameraAuthorisationView: UIView {
   }
   
   func animateOutViews(completion: @escaping () -> Void) {
-    let viewsToAnimate = [cameraImageView, titleLabel, messageLabel, actionButton]
+    let viewsToAnimate = [microphoneImageView, titleLabel, messageLabel, actionButton]
     
     for (i, viewToAnimate) in viewsToAnimate.enumerated() {
       
@@ -101,16 +100,17 @@ final class RequestCameraAuthorisationView: UIView {
   }
   
   func configureForErrorState() {
-    titleLabel.text = "Camera Authorisation Denied"
+    titleLabel.text = "Microphone Authorisation Denied"
     actionButton.setTitle("Open Settings", for: .normal)
     
     // increase the width of the button which we connected
     actionButtonWidthConstraint.constant = 180
   }
+
 }
 
 // MARK: - Animation functions
-private extension RequestCameraAuthorisationView {
+private extension RequestMicrophoneAuthorisationView {
   
   func animateInView(view: UIView, delay: TimeInterval = 0) {
     view.alpha = 0
