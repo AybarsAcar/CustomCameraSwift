@@ -7,10 +7,11 @@
 
 import UIKit
 
-class LaunchViewController: UIViewController {
+final class LaunchViewController: UIViewController {
   
   private var requestCameraAuthorisationView: RequestCameraAuthorisationView?
   private var requestMicrophoneAuthorisationView: RequestMicrophoneAuthorisationView?
+  private var requestPhotoLibraryAuthorisationView: RequestPhotoLibraryAuthorisationView?
   
   private var cameraAuthorisationStatus = CameraAuthorisationManager.shared.getCameraAuthorisationStatus() {
     didSet {
@@ -19,6 +20,12 @@ class LaunchViewController: UIViewController {
   }
   
   private var microphoneAuthorisationStatus = MicrophoneAuthorisationManager.shared.getMicrophoneAuthorisationStatus() {
+    didSet {
+      setupViewForNextAuthorisationRequest()
+    }
+  }
+  
+  private var photoLibraryAuthorisationStatus = PhotoLibraryAuthorisationManager.shared.getPhotoLibraryAuthorisationStatus() {
     didSet {
       setupViewForNextAuthorisationRequest()
     }
@@ -58,9 +65,22 @@ private extension LaunchViewController {
       return
     }
     
-    print("Request Photo Library Authorisation")
+    guard photoLibraryAuthorisationStatus == .granted else {
+      setupRequestPhotoLibraryAuthorisationView()
+      return
+    }
     
+    if requestPhotoLibraryAuthorisationView != nil {
+      removeRequestPhotoLibraryAuthorisationView()
+      return
+    }
+     
+    DispatchQueue.main.async {
+      AppSetup.shared.loadCaptureViewController()
+    }
   }
+  
+  // MARK: - Camera Auth View
   
   func setupRequestCameraAuthorisationView() {
     
@@ -103,6 +123,18 @@ private extension LaunchViewController {
     
   }
   
+  func removeRequestCameraAuthorisationView() {
+    
+    requestCameraAuthorisationView?.animateOutViews { [weak self] in
+      
+      self?.requestCameraAuthorisationView?.removeFromSuperview()
+      self?.requestCameraAuthorisationView = nil
+      self?.setupViewForNextAuthorisationRequest()
+    }
+  }
+  
+  // MARK: - Microphone Auth View
+  
   func setupRequestMicrophoneAuthorisationView() {
     
     guard requestCameraAuthorisationView == nil else {
@@ -144,22 +176,65 @@ private extension LaunchViewController {
     
   }
   
-  func removeRequestCameraAuthorisationView() {
-    
-    requestCameraAuthorisationView?.animateOutViews { [weak self] in
-      
-      self?.requestCameraAuthorisationView?.removeFromSuperview()
-      self?.requestCameraAuthorisationView = nil
-      self?.setupViewForNextAuthorisationRequest()
-    }
-  }
-  
   func removeRequestMicrophoneAuthorisationView() {
     
     requestMicrophoneAuthorisationView?.animateOutViews { [weak self] in
       
       self?.requestMicrophoneAuthorisationView?.removeFromSuperview()
       self?.requestMicrophoneAuthorisationView = nil
+      self?.setupViewForNextAuthorisationRequest()
+    }
+  }
+  
+  // MARK: - Photo Library View
+  
+  func setupRequestPhotoLibraryAuthorisationView() {
+    
+    guard requestPhotoLibraryAuthorisationView == nil else {
+      
+      // if unauthorised set up the view
+      if photoLibraryAuthorisationStatus == .unauthorised {
+        requestPhotoLibraryAuthorisationView?.configureForErrorState()
+      }
+      
+      return
+    }
+    
+    // create an instance of the request
+    let requestPhotoLibraryAuthorisationView = RequestPhotoLibraryAuthorisationView()
+    
+    requestPhotoLibraryAuthorisationView.delegate = self
+    
+    // to apply constraints
+    requestPhotoLibraryAuthorisationView.translatesAutoresizingMaskIntoConstraints = false
+    
+    view.addSubview(requestPhotoLibraryAuthorisationView)
+    
+    NSLayoutConstraint.activate([
+      requestPhotoLibraryAuthorisationView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      requestPhotoLibraryAuthorisationView.topAnchor.constraint(equalTo: view.topAnchor),
+      requestPhotoLibraryAuthorisationView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      requestPhotoLibraryAuthorisationView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+    ])
+    
+    // animate the added view
+    requestPhotoLibraryAuthorisationView.animateInViews()
+    
+    // if unauthorised set up the view that way
+    if photoLibraryAuthorisationStatus == .unauthorised {
+      requestPhotoLibraryAuthorisationView.configureForErrorState()
+    }
+    
+    self.requestPhotoLibraryAuthorisationView = requestPhotoLibraryAuthorisationView
+    
+  }
+  
+  func removeRequestPhotoLibraryAuthorisationView() {
+    
+    requestPhotoLibraryAuthorisationView?.animateOutViews { [weak self] in
+      
+      self?.requestPhotoLibraryAuthorisationView?.removeFromSuperview()
+      self?.requestPhotoLibraryAuthorisationView = nil
       self?.setupViewForNextAuthorisationRequest()
     }
   }
@@ -211,6 +286,28 @@ extension LaunchViewController: RequestMicrophoneAuthorisationViewDelegate {
         guard let self = self else { return }
         
         self.microphoneAuthorisationStatus = status
+        
+      }
+    }
+  }
+}
+
+// MARK: - RequestPhotoLibraryAuthorisationViewDelegate
+extension LaunchViewController: RequestPhotoLibraryAuthorisationViewDelegate {
+  
+  func requestPhotoLibraryTapped() {
+    
+    if photoLibraryAuthorisationStatus == .unauthorised {
+      // open the device settings
+      openSettings()
+    }
+    
+    if photoLibraryAuthorisationStatus == .notRequested {
+      PhotoLibraryAuthorisationManager.shared.requestPhotoLibraryAuthorisation { [weak self] status in
+        
+        guard let self = self else { return }
+        
+        self.photoLibraryAuthorisationStatus = status
         
       }
     }

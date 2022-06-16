@@ -11,7 +11,7 @@ protocol RequestMicrophoneAuthorisationViewDelegate: AnyObject {
   func requestMicrophoneAuthorisationTapped()
 }
 
-class RequestMicrophoneAuthorisationView: UIView {
+final class RequestMicrophoneAuthorisationView: UIView {
 
   @IBOutlet private weak var contentView: UIView!
   
@@ -54,30 +54,17 @@ class RequestMicrophoneAuthorisationView: UIView {
   }
   
   private func addActionButtonShadowAndCornerRadius() {
-    actionButton.layer.shadowColor = UIColor.black.cgColor
-    actionButton.layer.shadowRadius = 10
-    actionButton.layer.shadowOpacity = 0.3
-    actionButton.layer.masksToBounds = false
-    actionButton.layer.shadowOffset = CGSize(width: 5, height: 10)
-    
-    actionButton.layer.cornerRadius = 4
+    actionButton.addShadow()
   }
   
   func animateInViews() {
-    microphoneImageView.alpha = 0
-    titleLabel.alpha = 0
-    messageLabel.alpha = 0
-    actionButton.alpha = 0
-    
-    animateInView(view: microphoneImageView)
-    
     let viewsToAnimate = [microphoneImageView, titleLabel, messageLabel, actionButton]
     
     for (i, viewToAnimate) in viewsToAnimate.enumerated() {
       
       guard let viewToAnimate = viewToAnimate else  { continue }
       
-      animateInView(view: viewToAnimate, delay: Double(i) * (0.15))
+      viewToAnimate.animateInView(delay: Double(i) * (0.15))
     }
     
   }
@@ -95,7 +82,7 @@ class RequestMicrophoneAuthorisationView: UIView {
         completionHandler = completion
       }
       
-      animateOutView(view: viewToAnimate, delay: Double(i) * (0.15), completion: completionHandler)
+      viewToAnimate.animateOutView(delay: Double(i) * (0.15), completion: completionHandler)
     }
   }
   
@@ -107,33 +94,4 @@ class RequestMicrophoneAuthorisationView: UIView {
     actionButtonWidthConstraint.constant = 180
   }
 
-}
-
-// MARK: - Animation functions
-private extension RequestMicrophoneAuthorisationView {
-  
-  func animateInView(view: UIView, delay: TimeInterval = 0) {
-    view.alpha = 0
-    view.transform = CGAffineTransform(translationX: 0, y: -20)
-    
-    let animation = UIViewPropertyAnimator(duration: 0.2, curve: .easeInOut) {
-      view.alpha = 1
-      view.transform = .identity
-    }
-    
-    animation.startAnimation(afterDelay: delay)
-  }
-  
-  func animateOutView(view: UIView, delay: TimeInterval = 0, completion: (() -> Void)? = nil) {
-    let animation = UIViewPropertyAnimator(duration: 0.2, curve: .easeInOut) {
-      view.alpha = 0
-      view.transform = CGAffineTransform(translationX: 0, y: -20)
-    }
-    
-    animation.addCompletion { _ in
-      completion?()
-    }
-    
-    animation.startAnimation(afterDelay: delay)
-  }
 }

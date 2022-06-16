@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RequestPhotoLibraryAuthorisationView" customModule="CustomCamera" customModuleProvider="target">
+            <connections>
+                <outlet property="actionButton" destination="gKL-sh-Md9" id="0EJ-ad-GJl"/>
+                <outlet property="actionButtonWidthConstraint" destination="z8T-OO-rs5" id="T3D-pi-VOK"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="0DV-7g-Yt3"/>
+                <outlet property="messageLabel" destination="Kao-pD-jDX" id="SqF-hi-kpR"/>
+                <outlet property="photoImageView" destination="LTK-J7-bSK" id="BbF-f5-4kO"/>
+                <outlet property="titleLabel" destination="PaH-vq-nSm" id="qJ9-L6-giq"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="LTK-J7-bSK" userLabel="Title Label">
+                    <rect key="frame" x="177" y="344" width="60" height="57.5"/>
+                    <color key="tintColor" systemColor="systemGray2Color"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="dB5-kv-Ph2"/>
+                        <constraint firstAttribute="height" constant="60" id="kbL-2R-0dy"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Photo Library Authorisation" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PaH-vq-nSm" userLabel="Title Label">
+                    <rect key="frame" x="20" y="433" width="374" height="30"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gKL-sh-Md9" userLabel="Action Button">
+                    <rect key="frame" x="167" y="529.5" width="80" height="60"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="gjS-nI-WWy"/>
+                        <constraint firstAttribute="width" constant="80" id="z8T-OO-rs5"/>
+                    </constraints>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Allow"/>
+                    <connections>
+                        <action selector="actionButtonHandlerWithButton:" destination="-1" eventType="touchUpInside" id="g1t-sT-e0g"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This app requires access to user photo library" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kao-pD-jDX" userLabel="Message Label">
+                    <rect key="frame" x="30" y="479" width="354" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="Kao-pD-jDX" firstAttribute="top" secondItem="PaH-vq-nSm" secondAttribute="bottom" constant="16" id="2JW-Er-ERx"/>
+                <constraint firstItem="PaH-vq-nSm" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="8wb-Ij-QdU"/>
+                <constraint firstAttribute="trailing" secondItem="PaH-vq-nSm" secondAttribute="trailing" constant="20" id="DFs-Z8-hfF"/>
+                <constraint firstItem="Kao-pD-jDX" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="EQc-pl-3mT"/>
+                <constraint firstItem="gKL-sh-Md9" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="HDv-OP-Nwi"/>
+                <constraint firstItem="PaH-vq-nSm" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="Qsy-XT-sIc"/>
+                <constraint firstItem="Kao-pD-jDX" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ewu-5x-NfK"/>
+                <constraint firstItem="LTK-J7-bSK" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="npH-lm-x0E"/>
+                <constraint firstItem="PaH-vq-nSm" firstAttribute="top" secondItem="LTK-J7-bSK" secondAttribute="bottom" constant="30" id="o2i-Mx-ijb"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Kao-pD-jDX" secondAttribute="trailing" constant="30" id="rDR-ac-Sv0"/>
+                <constraint firstItem="gKL-sh-Md9" firstAttribute="top" secondItem="Kao-pD-jDX" secondAttribute="bottom" constant="30" id="skT-Ox-Zei"/>
+            </constraints>
+            <point key="canvasLocation" x="132" y="132"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="photo" catalog="system" width="128" height="93"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

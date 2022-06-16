@@ -1,34 +1,33 @@
 //
-//  RequestCameraAuthorisationView.swift
+//  RequestPhotoLibraryAuthorisationView.swift
 //  CustomCamera
 //
-//  Created by Aybars Acar on 13/6/2022.
+//  Created by Aybars Acar on 16/6/2022.
 //
 
 import UIKit
 
-protocol RequestCameraAuthorisationViewDelegate: AnyObject {
-  func requestCameraAuthorisationTapped()
+protocol RequestPhotoLibraryAuthorisationViewDelegate: AnyObject {
+  
+  func requestPhotoLibraryTapped()
 }
 
-/// this will be our view that we display when requesting authorisation
-final class RequestCameraAuthorisationView: UIView {
-  
+class RequestPhotoLibraryAuthorisationView: UIView {
+
   @IBOutlet private weak var contentView: UIView!
-  
-  @IBOutlet private weak var cameraImageView: UIImageView!
+  @IBOutlet private weak var photoImageView: UIImageView!
   @IBOutlet private weak var titleLabel: UILabel!
   @IBOutlet private weak var messageLabel: UILabel!
   @IBOutlet private weak var actionButton: UIButton!
   @IBOutlet private weak var actionButtonWidthConstraint: NSLayoutConstraint!
   
-  weak var delegate: RequestCameraAuthorisationViewDelegate?
+  weak var delegate: RequestPhotoLibraryAuthorisationViewDelegate?
   
   override init(frame: CGRect) {
     super.init(frame: frame)
     customInit()
   }
-  
+
   required init?(coder: NSCoder) {
     super.init(coder: coder)
     customInit()
@@ -37,29 +36,22 @@ final class RequestCameraAuthorisationView: UIView {
   private func customInit() {
     // load the nib
     let bundle = Bundle.main
-    let nibName = String(describing: Self.self)
-    bundle.loadNibNamed(nibName, owner: self, options: nil)
+    bundle.loadNibNamed(String(describing: Self.self), owner: self)
     
-    // add the content view as a subview
     addSubview(contentView)
     
-    // set the frame of the content view
     contentView.frame = bounds
     contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     
-    addActionButtonShadowAndCornerRadius()
+    addActionButtonShadow()
   }
   
   @IBAction func actionButtonHandler(button: UIButton) {
-    delegate?.requestCameraAuthorisationTapped()
-  }
-  
-  private func addActionButtonShadowAndCornerRadius() {
-    actionButton.addShadow()
+    delegate?.requestPhotoLibraryTapped()
   }
   
   func animateInViews() {
-    let viewsToAnimate = [cameraImageView, titleLabel, messageLabel, actionButton]
+    let viewsToAnimate = [photoImageView, titleLabel, messageLabel, actionButton]
     
     for (i, viewToAnimate) in viewsToAnimate.enumerated() {
       
@@ -71,7 +63,7 @@ final class RequestCameraAuthorisationView: UIView {
   }
   
   func animateOutViews(completion: @escaping () -> Void) {
-    let viewsToAnimate = [cameraImageView, titleLabel, messageLabel, actionButton]
+    let viewsToAnimate = [photoImageView, titleLabel, messageLabel, actionButton]
     
     for (i, viewToAnimate) in viewsToAnimate.enumerated() {
       
@@ -88,10 +80,17 @@ final class RequestCameraAuthorisationView: UIView {
   }
   
   func configureForErrorState() {
-    titleLabel.text = "Camera Authorisation Denied"
+    titleLabel.text = "Photo Library Authorisation Denied"
     actionButton.setTitle("Open Settings", for: .normal)
     
     // increase the width of the button which we connected
     actionButtonWidthConstraint.constant = 180
+  }
+}
+
+private extension RequestPhotoLibraryAuthorisationView {
+  
+  func addActionButtonShadow() {
+    actionButton.addShadow()
   }
 }
