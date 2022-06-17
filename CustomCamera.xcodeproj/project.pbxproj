@@ -15,6 +15,12 @@
 		00DDB7F3285B43770045C9F1 /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDB7F1285B43770045C9F1 /* CaptureViewController.swift */; };
 		00DDB7F4285B43770045C9F1 /* CaptureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00DDB7F2285B43770045C9F1 /* CaptureViewController.xib */; };
 		00DDB7F7285B43B40045C9F1 /* AppSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDB7F6285B43B40045C9F1 /* AppSetup.swift */; };
+		00DDB7FA285B45DB0045C9F1 /* VideoPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDB7F9285B45DB0045C9F1 /* VideoPreviewView.swift */; };
+		00DDB7FD285B48B30045C9F1 /* CaptureSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDB7FC285B48B30045C9F1 /* CaptureSessionManager.swift */; };
+		00DDB800285C7CAE0045C9F1 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDB7FF285C7CAE0045C9F1 /* TimerView.swift */; };
+		00DDB802285C7CBD0045C9F1 /* TimerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00DDB801285C7CBD0045C9F1 /* TimerView.xib */; };
+		00DDB805285C7F920045C9F1 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDB804285C7F920045C9F1 /* RecordView.swift */; };
+		00DDB807285C7FA80045C9F1 /* RecordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00DDB806285C7FA80045C9F1 /* RecordView.xib */; };
 		00F8BAEF2857323D00C5FF8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F8BAEE2857323D00C5FF8F /* AppDelegate.swift */; };
 		00F8BAF12857323D00C5FF8F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F8BAF02857323D00C5FF8F /* SceneDelegate.swift */; };
 		00F8BAF32857323D00C5FF8F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F8BAF22857323D00C5FF8F /* ViewController.swift */; };
@@ -40,6 +46,12 @@
 		00DDB7F1285B43770045C9F1 /* CaptureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
 		00DDB7F2285B43770045C9F1 /* CaptureViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CaptureViewController.xib; sourceTree = "<group>"; };
 		00DDB7F6285B43B40045C9F1 /* AppSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSetup.swift; sourceTree = "<group>"; };
+		00DDB7F9285B45DB0045C9F1 /* VideoPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPreviewView.swift; sourceTree = "<group>"; };
+		00DDB7FC285B48B30045C9F1 /* CaptureSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureSessionManager.swift; sourceTree = "<group>"; };
+		00DDB7FF285C7CAE0045C9F1 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		00DDB801285C7CBD0045C9F1 /* TimerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimerView.xib; sourceTree = "<group>"; };
+		00DDB804285C7F920045C9F1 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
+		00DDB806285C7FA80045C9F1 /* RecordView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecordView.xib; sourceTree = "<group>"; };
 		00F8BAEB2857323D00C5FF8F /* CustomCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00F8BAEE2857323D00C5FF8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		00F8BAF02857323D00C5FF8F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -104,6 +116,40 @@
 			path = Capture;
 			sourceTree = "<group>";
 		};
+		00DDB7F8285B45C30045C9F1 /* VideoPreview */ = {
+			isa = PBXGroup;
+			children = (
+				00DDB7F9285B45DB0045C9F1 /* VideoPreviewView.swift */,
+			);
+			path = VideoPreview;
+			sourceTree = "<group>";
+		};
+		00DDB7FB285B48A80045C9F1 /* CaptureSession */ = {
+			isa = PBXGroup;
+			children = (
+				00DDB7FC285B48B30045C9F1 /* CaptureSessionManager.swift */,
+			);
+			path = CaptureSession;
+			sourceTree = "<group>";
+		};
+		00DDB7FE285C7C9B0045C9F1 /* TimerView */ = {
+			isa = PBXGroup;
+			children = (
+				00DDB7FF285C7CAE0045C9F1 /* TimerView.swift */,
+				00DDB801285C7CBD0045C9F1 /* TimerView.xib */,
+			);
+			path = TimerView;
+			sourceTree = "<group>";
+		};
+		00DDB803285C7F820045C9F1 /* RecordView */ = {
+			isa = PBXGroup;
+			children = (
+				00DDB804285C7F920045C9F1 /* RecordView.swift */,
+				00DDB806285C7FA80045C9F1 /* RecordView.xib */,
+			);
+			path = RecordView;
+			sourceTree = "<group>";
+		};
 		00F8BAE22857323D00C5FF8F = {
 			isa = PBXGroup;
 			children = (
@@ -125,6 +171,7 @@
 			children = (
 				00F8BAFC2857323E00C5FF8F /* Info.plist */,
 				00F8BAEE2857323D00C5FF8F /* AppDelegate.swift */,
+				00DDB7F6285B43B40045C9F1 /* AppSetup.swift */,
 				00F8BAF02857323D00C5FF8F /* SceneDelegate.swift */,
 				00F8BAF72857323E00C5FF8F /* Assets.xcassets */,
 				00F8BB1028573A5800C5FF8F /* Controllers */,
@@ -133,7 +180,6 @@
 				00F8BAF42857323D00C5FF8F /* Main.storyboard */,
 				00F8BB022857329F00C5FF8F /* ViewControllers */,
 				00F8BB09285733B600C5FF8F /* Views */,
-				00DDB7F6285B43B40045C9F1 /* AppSetup.swift */,
 			);
 			path = CustomCamera;
 			sourceTree = "<group>";
@@ -168,6 +214,9 @@
 		00F8BB09285733B600C5FF8F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				00DDB803285C7F820045C9F1 /* RecordView */,
+				00DDB7FE285C7C9B0045C9F1 /* TimerView */,
+				00DDB7F8285B45C30045C9F1 /* VideoPreview */,
 				00F8BB0A285733B900C5FF8F /* RequestAuthorisation */,
 			);
 			path = Views;
@@ -195,6 +244,7 @@
 		00F8BB1028573A5800C5FF8F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				00DDB7FB285B48A80045C9F1 /* CaptureSession */,
 				00F8BB1128573A5E00C5FF8F /* RequestAuthorisation */,
 			);
 			path = Controllers;
@@ -294,9 +344,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				00F8BAFB2857323E00C5FF8F /* LaunchScreen.storyboard in Resources */,
+				00DDB802285C7CBD0045C9F1 /* TimerView.xib in Resources */,
 				00DDB7E6285B39E90045C9F1 /* RequestPhotoLibraryAuthorisationView.xib in Resources */,
 				00F8BAF82857323E00C5FF8F /* Assets.xcassets in Resources */,
 				00F8BB0F2857340D00C5FF8F /* RequestCameraAuthorisationView.xib in Resources */,
+				00DDB807285C7FA80045C9F1 /* RecordView.xib in Resources */,
 				00F8BB1928574D4800C5FF8F /* RequestMicrophoneAuthorisationView.xib in Resources */,
 				00DDB7F4285B43770045C9F1 /* CaptureViewController.xib in Resources */,
 				00F8BAF62857323D00C5FF8F /* Main.storyboard in Resources */,
@@ -312,14 +364,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				00F8BB1C2857501700C5FF8F /* MicrophoneAuthorisationManager.swift in Sources */,
+				00DDB805285C7F920045C9F1 /* RecordView.swift in Sources */,
 				00F8BAF32857323D00C5FF8F /* ViewController.swift in Sources */,
 				00DDB7EA285B3D2F0045C9F1 /* UIView+AddShadow.swift in Sources */,
 				00F8BB0D285733E300C5FF8F /* RequestCameraAuthorisationView.swift in Sources */,
 				00F8BAEF2857323D00C5FF8F /* AppDelegate.swift in Sources */,
 				00DDB7EF285B3F1E0045C9F1 /* PhotoLibraryAuthorisationManager.swift in Sources */,
 				00F8BAF12857323D00C5FF8F /* SceneDelegate.swift in Sources */,
+				00DDB800285C7CAE0045C9F1 /* TimerView.swift in Sources */,
 				00DDB7F7285B43B40045C9F1 /* AppSetup.swift in Sources */,
 				00F8BB07285732DD00C5FF8F /* LaunchViewController.swift in Sources */,
+				00DDB7FD285B48B30045C9F1 /* CaptureSessionManager.swift in Sources */,
+				00DDB7FA285B45DB0045C9F1 /* VideoPreviewView.swift in Sources */,
 				00DDB7F3285B43770045C9F1 /* CaptureViewController.swift in Sources */,
 				00DDB7E4285B39D80045C9F1 /* RequestPhotoLibraryAuthorisationView.swift in Sources */,
 				00F8BB1428573A7A00C5FF8F /* CameraAuthorisationManager.swift in Sources */,

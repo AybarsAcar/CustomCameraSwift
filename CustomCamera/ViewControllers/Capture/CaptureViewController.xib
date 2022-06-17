@@ -10,6 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CaptureViewController" customModule="CustomCamera" customModuleProvider="target">
             <connections>
+                <outlet property="recordView" destination="2C2-da-3wx" id="Gcg-m2-5MI"/>
+                <outlet property="videoPreviewView" destination="1wU-Al-dQF" id="0Mg-3g-IPc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -17,8 +19,44 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1wU-Al-dQF" userLabel="Video Preview View" customClass="VideoPreviewView" customModule="CustomCamera" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y0b-8P-ndP" userLabel="Timer View" customClass="TimerView" customModule="CustomCamera" customModuleProvider="target">
+                    <rect key="frame" x="147" y="74" width="120" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="89T-hG-g6c"/>
+                        <constraint firstAttribute="width" constant="120" id="R85-jz-il6"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="4"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2C2-da-3wx" customClass="RecordView" customModule="CustomCamera" customModuleProvider="target">
+                    <rect key="frame" x="167" y="752" width="80" height="80"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="908-Q4-ftJ"/>
+                        <constraint firstAttribute="height" constant="80" id="Wc5-lS-eKF"/>
+                    </constraints>
+                </view>
+            </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="1wU-Al-dQF" secondAttribute="trailing" id="LtS-iY-omZ"/>
+                <constraint firstAttribute="bottom" secondItem="1wU-Al-dQF" secondAttribute="bottom" id="WSh-iF-tDE"/>
+                <constraint firstItem="1wU-Al-dQF" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="cEL-eU-Rfd"/>
+                <constraint firstItem="1wU-Al-dQF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="cWB-CM-Y9b"/>
+                <constraint firstItem="Y0b-8P-ndP" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="n1f-UD-ut9"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="2C2-da-3wx" secondAttribute="bottom" constant="30" placeholder="YES" id="pxH-WY-xkD"/>
+                <constraint firstItem="2C2-da-3wx" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" placeholder="YES" id="wJ6-Zv-NIV"/>
+                <constraint firstItem="Y0b-8P-ndP" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="woo-qP-q8K"/>
+            </constraints>
             <point key="canvasLocation" x="132" y="132"/>
         </view>
     </objects>
