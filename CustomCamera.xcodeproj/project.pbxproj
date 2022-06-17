@@ -21,6 +21,7 @@
 		00DDB802285C7CBD0045C9F1 /* TimerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00DDB801285C7CBD0045C9F1 /* TimerView.xib */; };
 		00DDB805285C7F920045C9F1 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDB804285C7F920045C9F1 /* RecordView.swift */; };
 		00DDB807285C7FA80045C9F1 /* RecordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00DDB806285C7FA80045C9F1 /* RecordView.xib */; };
+		00DDB80A285C99A10045C9F1 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDB809285C99A10045C9F1 /* TimerManager.swift */; };
 		00F8BAEF2857323D00C5FF8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F8BAEE2857323D00C5FF8F /* AppDelegate.swift */; };
 		00F8BAF12857323D00C5FF8F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F8BAF02857323D00C5FF8F /* SceneDelegate.swift */; };
 		00F8BAF32857323D00C5FF8F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F8BAF22857323D00C5FF8F /* ViewController.swift */; };
@@ -52,6 +53,7 @@
 		00DDB801285C7CBD0045C9F1 /* TimerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimerView.xib; sourceTree = "<group>"; };
 		00DDB804285C7F920045C9F1 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		00DDB806285C7FA80045C9F1 /* RecordView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecordView.xib; sourceTree = "<group>"; };
+		00DDB809285C99A10045C9F1 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		00F8BAEB2857323D00C5FF8F /* CustomCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00F8BAEE2857323D00C5FF8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		00F8BAF02857323D00C5FF8F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -150,6 +152,14 @@
 			path = RecordView;
 			sourceTree = "<group>";
 		};
+		00DDB808285C99950045C9F1 /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				00DDB809285C99A10045C9F1 /* TimerManager.swift */,
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
 		00F8BAE22857323D00C5FF8F = {
 			isa = PBXGroup;
 			children = (
@@ -244,6 +254,7 @@
 		00F8BB1028573A5800C5FF8F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				00DDB808285C99950045C9F1 /* Timer */,
 				00DDB7FB285B48A80045C9F1 /* CaptureSession */,
 				00F8BB1128573A5E00C5FF8F /* RequestAuthorisation */,
 			);
@@ -381,6 +392,7 @@
 				00F8BB1428573A7A00C5FF8F /* CameraAuthorisationManager.swift in Sources */,
 				00F8BB1728574D2F00C5FF8F /* RequestMicrophoneAuthorisationView.swift in Sources */,
 				00DDB7EC285B3DF10045C9F1 /* UIView+Animations.swift in Sources */,
+				00DDB80A285C99A10045C9F1 /* TimerManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

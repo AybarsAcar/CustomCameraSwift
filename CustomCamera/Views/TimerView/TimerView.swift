@@ -34,4 +34,17 @@ final class TimerView: UIView {
     contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     
   }
+  
+  /// displays the time as mm:ss
+  public func updateTime(seconds: Int64) {
+  
+    let timeInterval = TimeInterval(integerLiteral: seconds)
+    
+    let formatter = DateComponentsFormatter()
+    formatter.allowedUnits = [.minute, .second]
+    formatter.unitsStyle = .positional
+    formatter.zeroFormattingBehavior = .pad
+    
+    timerLabel.text = formatter.string(from: timeInterval) ?? "00:00"
+  }
 }

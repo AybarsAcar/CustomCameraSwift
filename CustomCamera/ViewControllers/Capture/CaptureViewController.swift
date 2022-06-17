@@ -10,12 +10,15 @@ import UIKit
 final class CaptureViewController: UIViewController {
   
   @IBOutlet private weak var videoPreviewView: VideoPreviewView!
+  @IBOutlet private weak var timerView: TimerView!
   @IBOutlet private weak var recordView: RecordView!
   
   private lazy var captureSession = CaptureSessionManager()
   
   private var portraitConstraints = [NSLayoutConstraint]()
   private var landscapeConstraints = [NSLayoutConstraint]()
+  
+  private lazy var timerManager = TimerManager()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -24,8 +27,9 @@ final class CaptureViewController: UIViewController {
     
     initialiseConstraints()
     
+    setupTimer()
   }
-  
+
   /// called when the size class changes in the application
   /// when we change the screen orientation
   override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -67,6 +71,13 @@ private extension CaptureViewController {
       // we are in portrait orientation
       NSLayoutConstraint.deactivate(landscapeConstraints)
       NSLayoutConstraint.activate(portraitConstraints)
+    }
+  }
+  
+  func setupTimer() {
+    timerManager.setupTimer { [weak self] seconds in
+      guard let self = self else { return }
+      self.timerView.updateTime(seconds: seconds)
     }
   }
 }

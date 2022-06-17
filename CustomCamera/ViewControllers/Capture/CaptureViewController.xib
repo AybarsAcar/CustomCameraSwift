@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CaptureViewController" customModule="CustomCamera" customModuleProvider="target">
             <connections>
                 <outlet property="recordView" destination="2C2-da-3wx" id="Gcg-m2-5MI"/>
+                <outlet property="timerView" destination="Y0b-8P-ndP" id="VH4-dt-gGC"/>
                 <outlet property="videoPreviewView" destination="1wU-Al-dQF" id="0Mg-3g-IPc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

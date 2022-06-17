@@ -7,10 +7,19 @@
 
 import UIKit
 
+enum RecordViewState {
+  case stopped, recording
+}
+
 final class RecordView: UIView {
 
   @IBOutlet private weak var contentView: UIView!
-  @IBOutlet private weak var recordView: UIView!
+  @IBOutlet private weak var containerView: UIView!
+  @IBOutlet private weak var ringView: UIView!
+  @IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!
+  @IBOutlet private weak var stopView: UIView!
+  
+  private var state: RecordViewState = .stopped
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -30,6 +39,74 @@ final class RecordView: UIView {
     addSubview(contentView)
     contentView.frame = bounds
     contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+    
+    setupContainerView()
   }
 
+  @IBAction func tapHandler(tapGestureRecognizer: UITapGestureRecognizer) {
+    switch state {
+      
+    case .stopped:
+      state = .recording
+      animateForRecording()
+      
+    case .recording:
+      state = .stopped
+      animateForStopped()
+      
+    }
+  }
+}
+
+private extension RecordView {
+  
+  func setupContainerView() {
+    containerView.layer.borderWidth = 7
+    containerView.layer.borderColor = UIColor.systemRed.cgColor
+  }
+  
+  func animateForRecording() {
+    
+    let ringViewAnimation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) { [weak self] in
+      guard let self = self else { return }
+      self.ringView.transform = CGAffineTransform(translationX: 0, y: 70)
+      self.ringView.alpha = 0
+    }
+    
+    stopView.transform = CGAffineTransform(translationX: 0, y: 70)
+    stopView.alpha = 0
+    stopView.isHidden = false
+    
+    let stopViewAnimation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) { [weak self] in
+      guard let self = self else { return }
+      
+      self.stopView.transform = .identity
+      self.stopView.alpha = 1
+    }
+
+    ringViewAnimation.startAnimation()
+    stopViewAnimation.startAnimation(afterDelay: 0.3)
+  }
+  
+  func animateForStopped() {
+    let stopViewAnimation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) { [weak self] in
+      guard let self = self else { return }
+      
+      self.stopView.transform = CGAffineTransform(translationX: 0, y: 70)
+      self.stopView.alpha = 0
+    }
+    
+    ringView.transform = CGAffineTransform(translationX: 0, y: 70)
+    ringView.alpha = 0
+    
+    let ringViewAnimation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) { [weak self] in
+      guard let self = self else { return }
+      
+      self.ringView.transform = .identity
+      self.ringView.alpha = 1
+    }
+    
+    stopViewAnimation.startAnimation()
+    ringViewAnimation.startAnimation(afterDelay: 0.3)
+  }
 }
