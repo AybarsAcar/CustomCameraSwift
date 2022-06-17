@@ -26,8 +26,6 @@ final class CaptureViewController: UIViewController {
     videoPreviewView.videoPreviewLayer.session = captureSession.getCaptureSession()
     
     initialiseConstraints()
-    
-    setupTimer()
   }
 
   /// called when the size class changes in the application
@@ -35,7 +33,21 @@ final class CaptureViewController: UIViewController {
   override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
     print(size)
     
-    setupOrientationConstraint(size: size)
+    // to prevent animation when view orientation changes
+    hideRecordView()
+    
+    coordinator.animate { context in
+      
+    } completion: { [weak self] context in
+      guard let self = self else { return }
+    
+      self.setupOrientationConstraint(size: size)
+      self.showRecordView()
+    }
+  }
+  
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
   }
 }
 
@@ -79,5 +91,18 @@ private extension CaptureViewController {
       guard let self = self else { return }
       self.timerView.updateTime(seconds: seconds)
     }
+  }
+  
+  func hideRecordView() {
+    recordView.alpha = 0
+  }
+  
+  func showRecordView() {
+    
+    let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
+      self.recordView.alpha = 1
+    }
+    
+    animation.startAnimation()
   }
 }

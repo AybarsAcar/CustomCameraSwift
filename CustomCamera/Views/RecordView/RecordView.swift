@@ -61,8 +61,9 @@ final class RecordView: UIView {
 private extension RecordView {
   
   func setupContainerView() {
-    containerView.layer.borderWidth = 7
-    containerView.layer.borderColor = UIColor.systemRed.cgColor
+    // set up the stroke
+    containerView.layer.borderWidth = 4
+    containerView.layer.borderColor = UIColor.white.cgColor
   }
   
   func animateForRecording() {

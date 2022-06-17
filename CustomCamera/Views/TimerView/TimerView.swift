@@ -40,6 +40,7 @@ final class TimerView: UIView {
   
     let timeInterval = TimeInterval(integerLiteral: seconds)
     
+    // format the seconds as mm:ss
     let formatter = DateComponentsFormatter()
     formatter.allowedUnits = [.minute, .second]
     formatter.unitsStyle = .positional
