@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0086C5FE285F1729001E6098 /* UIColor+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086C5FD285F1729001E6098 /* UIColor+Colors.swift */; };
+		0086C601285F1822001E6098 /* SwitchZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086C600285F1822001E6098 /* SwitchZoomView.swift */; };
+		0086C603285F182F001E6098 /* SwitchZoomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0086C602285F182F001E6098 /* SwitchZoomView.xib */; };
 		00DDB7E4285B39D80045C9F1 /* RequestPhotoLibraryAuthorisationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDB7E3285B39D80045C9F1 /* RequestPhotoLibraryAuthorisationView.swift */; };
 		00DDB7E6285B39E90045C9F1 /* RequestPhotoLibraryAuthorisationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00DDB7E5285B39E90045C9F1 /* RequestPhotoLibraryAuthorisationView.xib */; };
 		00DDB7EA285B3D2F0045C9F1 /* UIView+AddShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDB7E9285B3D2F0045C9F1 /* UIView+AddShadow.swift */; };
@@ -39,6 +42,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0086C5FD285F1729001E6098 /* UIColor+Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Colors.swift"; sourceTree = "<group>"; };
+		0086C600285F1822001E6098 /* SwitchZoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchZoomView.swift; sourceTree = "<group>"; };
+		0086C602285F182F001E6098 /* SwitchZoomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchZoomView.xib; sourceTree = "<group>"; };
 		00DDB7E3285B39D80045C9F1 /* RequestPhotoLibraryAuthorisationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestPhotoLibraryAuthorisationView.swift; sourceTree = "<group>"; };
 		00DDB7E5285B39E90045C9F1 /* RequestPhotoLibraryAuthorisationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RequestPhotoLibraryAuthorisationView.xib; sourceTree = "<group>"; };
 		00DDB7E9285B3D2F0045C9F1 /* UIView+AddShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AddShadow.swift"; sourceTree = "<group>"; };
@@ -83,6 +89,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0086C5FF285F1803001E6098 /* SwitchZoom */ = {
+			isa = PBXGroup;
+			children = (
+				0086C600285F1822001E6098 /* SwitchZoomView.swift */,
+				0086C602285F182F001E6098 /* SwitchZoomView.xib */,
+			);
+			path = SwitchZoom;
+			sourceTree = "<group>";
+		};
 		00DDB7E2285B39BC0045C9F1 /* PhotoLibrary */ = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +112,7 @@
 			children = (
 				00DDB7E9285B3D2F0045C9F1 /* UIView+AddShadow.swift */,
 				00DDB7EB285B3DF10045C9F1 /* UIView+Animations.swift */,
+				0086C5FD285F1729001E6098 /* UIColor+Colors.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -224,6 +240,7 @@
 		00F8BB09285733B600C5FF8F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0086C5FF285F1803001E6098 /* SwitchZoom */,
 				00DDB803285C7F820045C9F1 /* RecordView */,
 				00DDB7FE285C7C9B0045C9F1 /* TimerView */,
 				00DDB7F8285B45C30045C9F1 /* VideoPreview */,
@@ -364,6 +381,7 @@
 				00DDB7F4285B43770045C9F1 /* CaptureViewController.xib in Resources */,
 				00F8BAF62857323D00C5FF8F /* Main.storyboard in Resources */,
 				00F8BB08285732DD00C5FF8F /* LaunchViewController.xib in Resources */,
+				0086C603285F182F001E6098 /* SwitchZoomView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,6 +399,7 @@
 				00F8BB0D285733E300C5FF8F /* RequestCameraAuthorisationView.swift in Sources */,
 				00F8BAEF2857323D00C5FF8F /* AppDelegate.swift in Sources */,
 				00DDB7EF285B3F1E0045C9F1 /* PhotoLibraryAuthorisationManager.swift in Sources */,
+				0086C601285F1822001E6098 /* SwitchZoomView.swift in Sources */,
 				00F8BAF12857323D00C5FF8F /* SceneDelegate.swift in Sources */,
 				00DDB800285C7CAE0045C9F1 /* TimerView.swift in Sources */,
 				00DDB7F7285B43B40045C9F1 /* AppSetup.swift in Sources */,
@@ -391,6 +410,7 @@
 				00DDB7E4285B39D80045C9F1 /* RequestPhotoLibraryAuthorisationView.swift in Sources */,
 				00F8BB1428573A7A00C5FF8F /* CameraAuthorisationManager.swift in Sources */,
 				00F8BB1728574D2F00C5FF8F /* RequestMicrophoneAuthorisationView.swift in Sources */,
+				0086C5FE285F1729001E6098 /* UIColor+Colors.swift in Sources */,
 				00DDB7EC285B3DF10045C9F1 /* UIView+Animations.swift in Sources */,
 				00DDB80A285C99A10045C9F1 /* TimerManager.swift in Sources */,
 			);
