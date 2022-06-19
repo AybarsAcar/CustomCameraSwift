@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00004756285F396900F97179 /* ToggleCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00004755285F396900F97179 /* ToggleCameraView.swift */; };
+		00004758285F397500F97179 /* ToggleCameraView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00004757285F397500F97179 /* ToggleCameraView.xib */; };
 		0086C5FE285F1729001E6098 /* UIColor+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086C5FD285F1729001E6098 /* UIColor+Colors.swift */; };
 		0086C601285F1822001E6098 /* SwitchZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086C600285F1822001E6098 /* SwitchZoomView.swift */; };
 		0086C603285F182F001E6098 /* SwitchZoomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0086C602285F182F001E6098 /* SwitchZoomView.xib */; };
@@ -42,6 +44,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		00004755285F396900F97179 /* ToggleCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleCameraView.swift; sourceTree = "<group>"; };
+		00004757285F397500F97179 /* ToggleCameraView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToggleCameraView.xib; sourceTree = "<group>"; };
 		0086C5FD285F1729001E6098 /* UIColor+Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Colors.swift"; sourceTree = "<group>"; };
 		0086C600285F1822001E6098 /* SwitchZoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchZoomView.swift; sourceTree = "<group>"; };
 		0086C602285F182F001E6098 /* SwitchZoomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchZoomView.xib; sourceTree = "<group>"; };
@@ -89,6 +93,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		00004754285F394B00F97179 /* ToggleCamera */ = {
+			isa = PBXGroup;
+			children = (
+				00004755285F396900F97179 /* ToggleCameraView.swift */,
+				00004757285F397500F97179 /* ToggleCameraView.xib */,
+			);
+			path = ToggleCamera;
+			sourceTree = "<group>";
+		};
 		0086C5FF285F1803001E6098 /* SwitchZoom */ = {
 			isa = PBXGroup;
 			children = (
@@ -240,6 +253,7 @@
 		00F8BB09285733B600C5FF8F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				00004754285F394B00F97179 /* ToggleCamera */,
 				0086C5FF285F1803001E6098 /* SwitchZoom */,
 				00DDB803285C7F820045C9F1 /* RecordView */,
 				00DDB7FE285C7C9B0045C9F1 /* TimerView */,
@@ -382,6 +396,7 @@
 				00F8BAF62857323D00C5FF8F /* Main.storyboard in Resources */,
 				00F8BB08285732DD00C5FF8F /* LaunchViewController.xib in Resources */,
 				0086C603285F182F001E6098 /* SwitchZoomView.xib in Resources */,
+				00004758285F397500F97179 /* ToggleCameraView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,6 +428,7 @@
 				0086C5FE285F1729001E6098 /* UIColor+Colors.swift in Sources */,
 				00DDB7EC285B3DF10045C9F1 /* UIView+Animations.swift in Sources */,
 				00DDB80A285C99A10045C9F1 /* TimerManager.swift in Sources */,
+				00004756285F396900F97179 /* ToggleCameraView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

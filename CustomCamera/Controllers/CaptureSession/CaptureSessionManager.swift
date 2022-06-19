@@ -8,20 +8,27 @@
 import Foundation
 import AVFoundation
 
+enum CameraType {
+  case ultrawide, wide, telephoto
+}
+
+typealias CaptureSessionInitialisedCompletionHandler = () -> Void
+
 final class CaptureSessionManager: NSObject {
   
   private lazy var captureSession = AVCaptureSession()
   
   // current capture device
   private var captureDevice: AVCaptureDevice?
+  private var captureDeviceInput: AVCaptureDeviceInput?
   private var zoomState: ZoomState = .wide
   
-  override init() {
+  init(completion: @escaping CaptureSessionInitialisedCompletionHandler) {
     super.init()
     
-    initialiseCaptureSession()
+    captureDevice = getBackCameraVideoCaptureDevice()
     
-    
+    initialiseCaptureSession(completion: completion)
   }
   
   func getCaptureSession() -> AVCaptureSession {
@@ -32,11 +39,47 @@ final class CaptureSessionManager: NSObject {
     self.zoomState = zoomState
     setVideoZoomFactor() // update the currently displaying Capture Session Controller Details
   }
+  
+  func getCameraTypes() -> [CameraType]? {
+    guard let captureDevice = captureDevice else {
+      return nil
+    }
+
+    switch captureDevice.deviceType {
+    case .builtInTripleCamera:
+      return [.ultrawide, .wide, .telephoto]
+      
+    case .builtInDualWideCamera:
+      return [.ultrawide, .wide]
+      
+    case .builtInDualCamera:
+      return [.wide, .telephoto]
+      
+    case .builtInWideAngleCamera:
+      return [.wide]
+      
+    default:
+      return nil
+    }
+  }
+  
+  func toggleCamera() {
+    // remove the capture device input
+    if let captureDeviceInput = captureDeviceInput {
+      captureSession.removeInput(captureDeviceInput)
+    }
+    
+    if let frontCaptureDevice = getFrontCameraVideoCaptureDevice() {
+      initialiseCaptureSession(captureDevice: frontCaptureDevice) {
+        
+      }
+    }
+  }
 }
 
 private extension CaptureSessionManager {
   
-  func getVideoCaptureDevice() -> AVCaptureDevice? {
+  func getBackCameraVideoCaptureDevice() -> AVCaptureDevice? {
     
     if let tripleCamera = AVCaptureDevice.default(.builtInTripleCamera, for: .video, position: .back) {
       return tripleCamera
@@ -57,6 +100,19 @@ private extension CaptureSessionManager {
     return nil
   }
   
+  func getFrontCameraVideoCaptureDevice() -> AVCaptureDevice? {
+    
+    if let trueDepthCamera = AVCaptureDevice.default(.builtInTrueDepthCamera, for: .video, position: .front) {
+      return trueDepthCamera
+    }
+    
+    if let wideAngleCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front) {
+      return wideAngleCamera
+    }
+    
+    return nil
+  }
+  
   func getCaptureDeviceInput(captureDevice: AVCaptureDevice) -> AVCaptureDeviceInput? {
     do {
       return try AVCaptureDeviceInput(device: captureDevice)
@@ -66,20 +122,30 @@ private extension CaptureSessionManager {
     }
   }
   
-  func initialiseCaptureSession() {
-    guard let captureDevice = getVideoCaptureDevice(),
+  func initialiseCaptureSession(captureDevice: AVCaptureDevice? = nil, completion: @escaping CaptureSessionInitialisedCompletionHandler) {
+    
+    var tempCaptureDevice = self.captureDevice
+    
+    if let passedCaptureDevice = captureDevice {
+      tempCaptureDevice = passedCaptureDevice
+    }
+    
+    guard let captureDevice = tempCaptureDevice,
           let captureDeviceInput = getCaptureDeviceInput(captureDevice: captureDevice),
           captureSession.canAddInput(captureDeviceInput) else {
       return
     }
     
     self.captureDevice = captureDevice
+    self.captureDeviceInput = captureDeviceInput
     
     captureSession.addInput(captureDeviceInput)
     
     captureSession.startRunning()
     
     setVideoZoomFactor()
+    
+    completion()
   }
   
   func setVideoCaptureDeviceZoom(videoZoomFactor: CGFloat, animated: Bool = false, rate: Float = 0) {

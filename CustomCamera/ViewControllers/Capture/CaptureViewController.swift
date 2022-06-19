@@ -12,9 +12,10 @@ final class CaptureViewController: UIViewController {
   @IBOutlet private weak var videoPreviewView: VideoPreviewView!
   @IBOutlet private weak var timerView: TimerView!
   @IBOutlet private weak var switchZoomView: SwitchZoomView!
+  @IBOutlet private weak var toggleCameraView: ToggleCameraView!
   @IBOutlet private weak var recordView: RecordView!
   
-  private lazy var captureSession = CaptureSessionManager()
+  private var captureSessionManager: CaptureSessionManager!
   
   private var portraitConstraints = [NSLayoutConstraint]()
   private var landscapeConstraints = [NSLayoutConstraint]()
@@ -24,11 +25,11 @@ final class CaptureViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    videoPreviewView.videoPreviewLayer.session = captureSession.getCaptureSession()
-    
     initialiseConstraints()
     
-    setupSwitchZoomView()
+    setupToggleCameraView()
+    
+    setupCaptureSessionManager()
   }
 
   /// called when the size class changes in the application
@@ -56,6 +57,8 @@ final class CaptureViewController: UIViewController {
 
 private extension CaptureViewController {
   
+  // MARK: - Custom Constraints
+  
   /// populates the array of constraints
   func initialiseConstraints() {
     
@@ -67,7 +70,10 @@ private extension CaptureViewController {
       switchZoomView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
       switchZoomView.widthAnchor.constraint(equalToConstant: 180),
       switchZoomView.heightAnchor.constraint(equalToConstant: 80),
-      switchZoomView.bottomAnchor.constraint(equalTo: recordView.topAnchor, constant: -30)
+      switchZoomView.bottomAnchor.constraint(equalTo: recordView.topAnchor, constant: -30),
+      
+      toggleCameraView.centerYAnchor.constraint(equalTo: recordView.centerYAnchor),
+      toggleCameraView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30)
     ]
     
     // aligned to the left centre
@@ -78,7 +84,10 @@ private extension CaptureViewController {
       switchZoomView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
       switchZoomView.widthAnchor.constraint(equalToConstant: 80),
       switchZoomView.heightAnchor.constraint(equalToConstant: 180),
-      switchZoomView.trailingAnchor.constraint(equalTo: recordView.leadingAnchor, constant: -30)
+      switchZoomView.trailingAnchor.constraint(equalTo: recordView.leadingAnchor, constant: -30),
+      
+      toggleCameraView.centerXAnchor.constraint(equalTo: recordView.centerXAnchor),
+      toggleCameraView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30)
     ]
     
     let screenSize = UIScreen.main.bounds.size
@@ -127,12 +136,53 @@ private extension CaptureViewController {
   
   func setupSwitchZoomView() {
     switchZoomView.delegate = self
+    
+    if let cameraTypes = captureSessionManager.getCameraTypes() {
+      
+      if cameraTypes.filter({ $0 == .ultrawide}).isEmpty {
+        // ultrawide camera type does not exist so hide it
+        switchZoomView.hideUltraWideButton()
+      }
+      
+      if cameraTypes.filter({ $0 == .telephoto}).isEmpty {
+        // telephoto camera type does not exist so hide it
+        switchZoomView.hideTelephotoButton()
+      }
+      
+      if cameraTypes == [.wide] {
+        // we have only 1 camera so hide the switch zoom view all together
+        switchZoomView.alpha = 0
+      }
+    }
+  }
+  
+  func setupCaptureSessionManager() {
+    captureSessionManager = CaptureSessionManager { [weak self] in
+      guard let self = self else {
+        return
+      }
+      
+      self.videoPreviewView.videoPreviewLayer.session = self.captureSessionManager.getCaptureSession()
+
+      self.setupSwitchZoomView()
+    }
+  }
+  
+  func setupToggleCameraView() {
+    toggleCameraView.delegate = self
   }
 }
 
 extension CaptureViewController: SwitchZoomViewDelegate {
   
   func switchZoomTapped(state: ZoomState) {
-    captureSession.setZoomState(state)
+    captureSessionManager.setZoomState(state)
+  }
+}
+
+extension CaptureViewController: ToggleCameraViewDelegate {
+  
+  func toggleCameraTapped() {
+    print("Toggle Camera TAPPED")
   }
 }
