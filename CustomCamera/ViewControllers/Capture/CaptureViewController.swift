@@ -235,6 +235,6 @@ extension CaptureViewController: SwitchZoomViewDelegate {
 extension CaptureViewController: ToggleCameraViewDelegate {
   
   func toggleCameraTapped() {
-    print("Toggle Camera TAPPED")
+    captureSessionManager.toggleCamera()
   }
 }

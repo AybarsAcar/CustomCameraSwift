@@ -68,9 +68,12 @@ final class CaptureSessionManager: NSObject {
       captureSession.removeInput(captureDeviceInput)
     }
     
-    if let frontCaptureDevice = getFrontCameraVideoCaptureDevice() {
-      initialiseCaptureSession(captureDevice: frontCaptureDevice) {
-        
+    // reinitialise the capture session in the next run loop
+    DispatchQueue.main.async { [weak self] in
+      if let frontCaptureDevice = self?.getFrontCameraVideoCaptureDevice() {
+        self?.initialiseCaptureSession(captureDevice: frontCaptureDevice) {
+          
+        }
       }
     }
   }
