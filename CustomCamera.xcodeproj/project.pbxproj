@@ -12,6 +12,8 @@
 		0086C5FE285F1729001E6098 /* UIColor+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086C5FD285F1729001E6098 /* UIColor+Colors.swift */; };
 		0086C601285F1822001E6098 /* SwitchZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086C600285F1822001E6098 /* SwitchZoomView.swift */; };
 		0086C603285F182F001E6098 /* SwitchZoomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0086C602285F182F001E6098 /* SwitchZoomView.xib */; };
+		00C1957628645E60002E0FC9 /* NotificationName+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C1957528645E60002E0FC9 /* NotificationName+Custom.swift */; };
+		00C19579286460F2002E0FC9 /* VideoOrientationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C19578286460F2002E0FC9 /* VideoOrientationManager.swift */; };
 		00DDB7E4285B39D80045C9F1 /* RequestPhotoLibraryAuthorisationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDB7E3285B39D80045C9F1 /* RequestPhotoLibraryAuthorisationView.swift */; };
 		00DDB7E6285B39E90045C9F1 /* RequestPhotoLibraryAuthorisationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00DDB7E5285B39E90045C9F1 /* RequestPhotoLibraryAuthorisationView.xib */; };
 		00DDB7EA285B3D2F0045C9F1 /* UIView+AddShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDB7E9285B3D2F0045C9F1 /* UIView+AddShadow.swift */; };
@@ -49,6 +51,8 @@
 		0086C5FD285F1729001E6098 /* UIColor+Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Colors.swift"; sourceTree = "<group>"; };
 		0086C600285F1822001E6098 /* SwitchZoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchZoomView.swift; sourceTree = "<group>"; };
 		0086C602285F182F001E6098 /* SwitchZoomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchZoomView.xib; sourceTree = "<group>"; };
+		00C1957528645E60002E0FC9 /* NotificationName+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Custom.swift"; sourceTree = "<group>"; };
+		00C19578286460F2002E0FC9 /* VideoOrientationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoOrientationManager.swift; sourceTree = "<group>"; };
 		00DDB7E3285B39D80045C9F1 /* RequestPhotoLibraryAuthorisationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestPhotoLibraryAuthorisationView.swift; sourceTree = "<group>"; };
 		00DDB7E5285B39E90045C9F1 /* RequestPhotoLibraryAuthorisationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RequestPhotoLibraryAuthorisationView.xib; sourceTree = "<group>"; };
 		00DDB7E9285B3D2F0045C9F1 /* UIView+AddShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AddShadow.swift"; sourceTree = "<group>"; };
@@ -111,6 +115,14 @@
 			path = SwitchZoom;
 			sourceTree = "<group>";
 		};
+		00C19577286460DF002E0FC9 /* VideoOrientation */ = {
+			isa = PBXGroup;
+			children = (
+				00C19578286460F2002E0FC9 /* VideoOrientationManager.swift */,
+			);
+			path = VideoOrientation;
+			sourceTree = "<group>";
+		};
 		00DDB7E2285B39BC0045C9F1 /* PhotoLibrary */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +138,7 @@
 				00DDB7E9285B3D2F0045C9F1 /* UIView+AddShadow.swift */,
 				00DDB7EB285B3DF10045C9F1 /* UIView+Animations.swift */,
 				0086C5FD285F1729001E6098 /* UIColor+Colors.swift */,
+				00C1957528645E60002E0FC9 /* NotificationName+Custom.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -285,6 +298,7 @@
 		00F8BB1028573A5800C5FF8F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				00C19577286460DF002E0FC9 /* VideoOrientation */,
 				00DDB808285C99950045C9F1 /* Timer */,
 				00DDB7FB285B48A80045C9F1 /* CaptureSession */,
 				00F8BB1128573A5E00C5FF8F /* RequestAuthorisation */,
@@ -413,9 +427,11 @@
 				00DDB7EA285B3D2F0045C9F1 /* UIView+AddShadow.swift in Sources */,
 				00F8BB0D285733E300C5FF8F /* RequestCameraAuthorisationView.swift in Sources */,
 				00F8BAEF2857323D00C5FF8F /* AppDelegate.swift in Sources */,
+				00C19579286460F2002E0FC9 /* VideoOrientationManager.swift in Sources */,
 				00DDB7EF285B3F1E0045C9F1 /* PhotoLibraryAuthorisationManager.swift in Sources */,
 				0086C601285F1822001E6098 /* SwitchZoomView.swift in Sources */,
 				00F8BAF12857323D00C5FF8F /* SceneDelegate.swift in Sources */,
+				00C1957628645E60002E0FC9 /* NotificationName+Custom.swift in Sources */,
 				00DDB800285C7CAE0045C9F1 /* TimerView.swift in Sources */,
 				00DDB7F7285B43B40045C9F1 /* AppSetup.swift in Sources */,
 				00F8BB07285732DD00C5FF8F /* LaunchViewController.swift in Sources */,

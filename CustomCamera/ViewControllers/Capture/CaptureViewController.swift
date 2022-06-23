@@ -10,12 +10,13 @@ import UIKit
 final class CaptureViewController: UIViewController {
   
   @IBOutlet private weak var videoPreviewView: VideoPreviewView!
+  @IBOutlet private weak var visualEffectView: UIVisualEffectView!
   @IBOutlet private weak var timerView: TimerView!
   @IBOutlet private weak var switchZoomView: SwitchZoomView!
   @IBOutlet private weak var toggleCameraView: ToggleCameraView!
   @IBOutlet private weak var recordView: RecordView!
   
-  private var captureSessionManager: CaptureSessionManager!
+  private var captureSessionManager = CaptureSessionManager()
   
   private var portraitConstraints = [NSLayoutConstraint]()
   private var landscapeConstraints = [NSLayoutConstraint]()
@@ -25,11 +26,15 @@ final class CaptureViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    setupVisualEffectView()
+    
     initialiseConstraints()
     
     setupToggleCameraView()
     
     setupCaptureSessionManager()
+    
+    registerForApplicationStateNotifications()
   }
 
   /// called when the size class changes in the application
@@ -40,7 +45,10 @@ final class CaptureViewController: UIViewController {
     // to prevent animation when view orientation changes
     hideViewsBeforeOrientationChange()
     
-    coordinator.animate { context in
+    coordinator.animate { [weak self] context in
+      guard let self = self else { return }
+      
+      self.setupVideoOrientation()
       
     } completion: { [weak self] context in
       guard let self = self else { return }
@@ -52,6 +60,11 @@ final class CaptureViewController: UIViewController {
   
   override var preferredStatusBarStyle: UIStatusBarStyle {
     return .lightContent
+  }
+  
+  deinit {
+    NotificationCenter.default.removeObserver(self, name: .ApplicationDidBecomeActive, object: nil)
+    NotificationCenter.default.removeObserver(self, name: .ApplicationWillResignActive, object: nil)
   }
 }
 
@@ -157,12 +170,16 @@ private extension CaptureViewController {
   }
   
   func setupCaptureSessionManager() {
-    captureSessionManager = CaptureSessionManager { [weak self] in
+    captureSessionManager.initialiseCaptureSession { [weak self] in
       guard let self = self else {
         return
       }
       
       self.videoPreviewView.videoPreviewLayer.session = self.captureSessionManager.getCaptureSession()
+      
+      self.setupVideoOrientation()
+      
+      self.setupToggleCameraView()
 
       self.setupSwitchZoomView()
     }
@@ -170,6 +187,41 @@ private extension CaptureViewController {
   
   func setupToggleCameraView() {
     toggleCameraView.delegate = self
+  }
+  
+  func setupVisualEffectView() {
+    // no effect
+    visualEffectView.effect = nil
+  }
+  
+  func registerForApplicationStateNotifications() {
+    NotificationCenter.default.addObserver(forName: .ApplicationDidBecomeActive, object: nil, queue: .main) { [weak self] notification in
+      guard let self = self else { return }
+      
+      UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
+        self.visualEffectView.effect = nil
+      } completion: { _ in
+      }
+    }
+    
+    NotificationCenter.default.addObserver(forName: .ApplicationWillResignActive, object: nil, queue: .main) { [weak self] notification in
+      guard let self = self else { return }
+      
+      UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
+        self.visualEffectView.effect = UIBlurEffect(style: .dark)
+      } completion: { _ in
+      }
+    }
+  }
+  
+  func setupVideoOrientation() {
+    guard let interfaceOrientation = AppSetup.shared.interfaceOrientation,
+          let videoOrientation = VideoOrientationManager.shared.getVideoOrientation(from: interfaceOrientation) else {
+      return
+    }
+    
+    // assign the video orientation
+    videoPreviewView.videoPreviewLayer.connection?.videoOrientation = videoOrientation
   }
 }
 
