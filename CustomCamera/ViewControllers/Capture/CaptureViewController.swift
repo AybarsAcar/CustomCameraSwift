@@ -13,6 +13,8 @@ final class CaptureViewController: UIViewController {
   @IBOutlet private weak var visualEffectView: UIVisualEffectView!
   @IBOutlet private weak var overlayView: UIView!
   @IBOutlet private weak var timerView: TimerView!
+  @IBOutlet private weak var torchView: TorchView!
+  @IBOutlet private weak var alertView: AlertView!
   @IBOutlet private weak var switchZoomView: SwitchZoomView!
   @IBOutlet private weak var toggleCameraView: ToggleCameraView!
   @IBOutlet private weak var recordView: RecordView!
@@ -29,8 +31,12 @@ final class CaptureViewController: UIViewController {
   
   private var shouldHideSwitchZoomView = false
   
+  private var hideAlertViewWorkItem: DispatchWorkItem?
+  
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    setupTorchView()
     
     setupVisualEffectView()
     
@@ -277,6 +283,77 @@ private extension CaptureViewController {
     switchZoomView.isHidden = shouldHideSwitchZoomView
     toggleCameraView.isHidden = false
   }
+  
+  func showAndHideAlertView(text: String) {
+    showAlertView(text: text)
+    
+    let hideAlertViewWorkItem = DispatchWorkItem { [weak self] in
+      guard let self = self else { return }
+      
+      self.hideAlertView()
+    }
+    
+    DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: hideAlertViewWorkItem)
+    self.hideAlertViewWorkItem = hideAlertViewWorkItem
+  }
+  
+  func showAlertView(text: String) {
+    hideAlertViewWorkItem?.cancel()
+    hideAlertViewWorkItem = nil
+    
+    // initially it is hidden
+    alertView.alpha = 0
+    alertView.setAlertText(text)
+    
+    // describe a slide in transform
+    alertView.transform = CGAffineTransform(translationX: 0, y: 30)
+    
+    // animate the view in
+    let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
+      self.alertView.transform = .identity
+      self.alertView.alpha = 1
+    }
+    
+    animation.startAnimation()
+  }
+  
+  func hideAlertView() {
+    let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
+      self.alertView.transform = CGAffineTransform(translationX: 0, y: 30)
+      self.alertView.alpha = 0
+    }
+    
+    animation.startAnimation()
+  }
+  
+  func setupTorchView() {
+    torchView.delegate = self
+  }
+}
+
+extension CaptureViewController: TorchViewDelegate {
+
+  func torchTapped(torchMode: TorchMode, completion: (Bool) -> Void) {
+    switch torchMode {
+    case .off:
+      let result = captureSessionManager.turnOnTorch()
+      
+      if !result {
+      showAlertView(text: "Could not turn on torch")
+      }
+      
+      completion(result)
+      
+    case .on:
+      let result = captureSessionManager.turnOffTorch()
+      
+      if !result {
+        showAlertView(text: "Could not turn off torch")
+      }
+      
+      completion(result)
+    }
+  }
 }
 
 extension CaptureViewController: SwitchZoomViewDelegate {
@@ -298,9 +375,11 @@ extension CaptureViewController: ToggleCameraViewDelegate {
         if !self.shouldHideSwitchZoomView {
           self.switchZoomView.isHidden = false
         }
+        self.torchView.isHidden = false
         
       case .front:
         self.switchZoomView.isHidden = true
+        self.torchView.isHidden = true
       }
     }
   }

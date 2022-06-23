@@ -14,6 +14,10 @@
 		0086C603285F182F001E6098 /* SwitchZoomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0086C602285F182F001E6098 /* SwitchZoomView.xib */; };
 		00C1957628645E60002E0FC9 /* NotificationName+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C1957528645E60002E0FC9 /* NotificationName+Custom.swift */; };
 		00C19579286460F2002E0FC9 /* VideoOrientationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C19578286460F2002E0FC9 /* VideoOrientationManager.swift */; };
+		00C1957C28647E0B002E0FC9 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C1957B28647E0B002E0FC9 /* AlertView.swift */; };
+		00C1957E28647E14002E0FC9 /* AlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00C1957D28647E14002E0FC9 /* AlertView.xib */; };
+		00C1958128648214002E0FC9 /* TorchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C1958028648214002E0FC9 /* TorchView.swift */; };
+		00C195832864821E002E0FC9 /* TorchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00C195822864821E002E0FC9 /* TorchView.xib */; };
 		00DDB7E4285B39D80045C9F1 /* RequestPhotoLibraryAuthorisationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDB7E3285B39D80045C9F1 /* RequestPhotoLibraryAuthorisationView.swift */; };
 		00DDB7E6285B39E90045C9F1 /* RequestPhotoLibraryAuthorisationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00DDB7E5285B39E90045C9F1 /* RequestPhotoLibraryAuthorisationView.xib */; };
 		00DDB7EA285B3D2F0045C9F1 /* UIView+AddShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDB7E9285B3D2F0045C9F1 /* UIView+AddShadow.swift */; };
@@ -53,6 +57,10 @@
 		0086C602285F182F001E6098 /* SwitchZoomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchZoomView.xib; sourceTree = "<group>"; };
 		00C1957528645E60002E0FC9 /* NotificationName+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Custom.swift"; sourceTree = "<group>"; };
 		00C19578286460F2002E0FC9 /* VideoOrientationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoOrientationManager.swift; sourceTree = "<group>"; };
+		00C1957B28647E0B002E0FC9 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		00C1957D28647E14002E0FC9 /* AlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertView.xib; sourceTree = "<group>"; };
+		00C1958028648214002E0FC9 /* TorchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorchView.swift; sourceTree = "<group>"; };
+		00C195822864821E002E0FC9 /* TorchView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TorchView.xib; sourceTree = "<group>"; };
 		00DDB7E3285B39D80045C9F1 /* RequestPhotoLibraryAuthorisationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestPhotoLibraryAuthorisationView.swift; sourceTree = "<group>"; };
 		00DDB7E5285B39E90045C9F1 /* RequestPhotoLibraryAuthorisationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RequestPhotoLibraryAuthorisationView.xib; sourceTree = "<group>"; };
 		00DDB7E9285B3D2F0045C9F1 /* UIView+AddShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AddShadow.swift"; sourceTree = "<group>"; };
@@ -121,6 +129,24 @@
 				00C19578286460F2002E0FC9 /* VideoOrientationManager.swift */,
 			);
 			path = VideoOrientation;
+			sourceTree = "<group>";
+		};
+		00C1957A28647DF7002E0FC9 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				00C1957B28647E0B002E0FC9 /* AlertView.swift */,
+				00C1957D28647E14002E0FC9 /* AlertView.xib */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		00C1957F28648207002E0FC9 /* Torch */ = {
+			isa = PBXGroup;
+			children = (
+				00C1958028648214002E0FC9 /* TorchView.swift */,
+				00C195822864821E002E0FC9 /* TorchView.xib */,
+			);
+			path = Torch;
 			sourceTree = "<group>";
 		};
 		00DDB7E2285B39BC0045C9F1 /* PhotoLibrary */ = {
@@ -266,12 +292,14 @@
 		00F8BB09285733B600C5FF8F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				00004754285F394B00F97179 /* ToggleCamera */,
-				0086C5FF285F1803001E6098 /* SwitchZoom */,
+				00C1957F28648207002E0FC9 /* Torch */,
+				00C1957A28647DF7002E0FC9 /* Alert */,
 				00DDB803285C7F820045C9F1 /* RecordView */,
-				00DDB7FE285C7C9B0045C9F1 /* TimerView */,
-				00DDB7F8285B45C30045C9F1 /* VideoPreview */,
 				00F8BB0A285733B900C5FF8F /* RequestAuthorisation */,
+				0086C5FF285F1803001E6098 /* SwitchZoom */,
+				00DDB7FE285C7C9B0045C9F1 /* TimerView */,
+				00004754285F394B00F97179 /* ToggleCamera */,
+				00DDB7F8285B45C30045C9F1 /* VideoPreview */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -404,10 +432,12 @@
 				00DDB7E6285B39E90045C9F1 /* RequestPhotoLibraryAuthorisationView.xib in Resources */,
 				00F8BAF82857323E00C5FF8F /* Assets.xcassets in Resources */,
 				00F8BB0F2857340D00C5FF8F /* RequestCameraAuthorisationView.xib in Resources */,
+				00C195832864821E002E0FC9 /* TorchView.xib in Resources */,
 				00DDB807285C7FA80045C9F1 /* RecordView.xib in Resources */,
 				00F8BB1928574D4800C5FF8F /* RequestMicrophoneAuthorisationView.xib in Resources */,
 				00DDB7F4285B43770045C9F1 /* CaptureViewController.xib in Resources */,
 				00F8BAF62857323D00C5FF8F /* Main.storyboard in Resources */,
+				00C1957E28647E14002E0FC9 /* AlertView.xib in Resources */,
 				00F8BB08285732DD00C5FF8F /* LaunchViewController.xib in Resources */,
 				0086C603285F182F001E6098 /* SwitchZoomView.xib in Resources */,
 				00004758285F397500F97179 /* ToggleCameraView.xib in Resources */,
@@ -426,6 +456,7 @@
 				00F8BAF32857323D00C5FF8F /* ViewController.swift in Sources */,
 				00DDB7EA285B3D2F0045C9F1 /* UIView+AddShadow.swift in Sources */,
 				00F8BB0D285733E300C5FF8F /* RequestCameraAuthorisationView.swift in Sources */,
+				00C1957C28647E0B002E0FC9 /* AlertView.swift in Sources */,
 				00F8BAEF2857323D00C5FF8F /* AppDelegate.swift in Sources */,
 				00C19579286460F2002E0FC9 /* VideoOrientationManager.swift in Sources */,
 				00DDB7EF285B3F1E0045C9F1 /* PhotoLibraryAuthorisationManager.swift in Sources */,
@@ -439,6 +470,7 @@
 				00DDB7FA285B45DB0045C9F1 /* VideoPreviewView.swift in Sources */,
 				00DDB7F3285B43770045C9F1 /* CaptureViewController.swift in Sources */,
 				00DDB7E4285B39D80045C9F1 /* RequestPhotoLibraryAuthorisationView.swift in Sources */,
+				00C1958128648214002E0FC9 /* TorchView.swift in Sources */,
 				00F8BB1428573A7A00C5FF8F /* CameraAuthorisationManager.swift in Sources */,
 				00F8BB1728574D2F00C5FF8F /* RequestMicrophoneAuthorisationView.swift in Sources */,
 				0086C5FE285F1729001E6098 /* UIColor+Colors.swift in Sources */,

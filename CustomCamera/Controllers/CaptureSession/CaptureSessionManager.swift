@@ -30,6 +30,8 @@ final class CaptureSessionManager: NSObject {
   
   private var cameraPosition: CameraPosition = .back
   
+  private var previousZoomState: ZoomState = .wide
+  
   override init() {
     super.init()
     
@@ -88,13 +90,21 @@ final class CaptureSessionManager: NSObject {
         }
         self.cameraPosition = .back
         
+        self.zoomState = self.previousZoomState
+        self.setVideoZoomFactor()
+        
       case .back:
+        self.previousZoomState = self.zoomState
+        self.zoomState = .wide
+        
         // if we are back switch to front camera
         if let frontCaptureDevice = self.getFrontCameraVideoCaptureDevice() {
           self.initialiseCaptureSession(captureDevice: frontCaptureDevice)
         }
         self.cameraPosition = .front
       }
+      
+      self.resetFocus()
       
       completion?(self.cameraPosition)
     }
@@ -181,6 +191,14 @@ final class CaptureSessionManager: NSObject {
   @objc func subjectAreaDidChangeNotificationHandler(notification: Notification) {
     let devicePoint = CGPoint(x: 0.5, y: 0.5)
     setFocus(focusMode: .continuousAutoFocus, exposureMode: .continuousAutoExposure, atPoint: devicePoint, shouldMonitorSubjectAreaChange: false)
+  }
+  
+  func turnOnTorch() -> Bool {
+    return setTorchMode(to: .on)
+  }
+  
+  func turnOffTorch() -> Bool {
+    return setTorchMode(to: .off)
   }
 }
 
@@ -302,5 +320,31 @@ private extension CaptureSessionManager {
     let videoZoomFactor = getVideoZoomFactor()
     
     setVideoCaptureDeviceZoom(videoZoomFactor: videoZoomFactor)
+  }
+  
+  func setTorchMode(to torchMode: AVCaptureDevice.TorchMode) -> Bool {
+    guard let captureDevice = captureDevice else {
+      return false
+    }
+    
+    do {
+      try captureDevice.lockForConfiguration()
+    } catch {
+      print("Failed to get lock configuration on capture device with error \(error)")
+    }
+    
+    guard captureDevice.isTorchAvailable else {
+      return false
+    }
+    
+    captureDevice.torchMode = torchMode
+    captureDevice.unlockForConfiguration()
+    return true
+  }
+  
+  func resetFocus() {
+    let devicePoint = CGPoint(x: 0.5, y: 0.5)
+    
+    setFocus(focusMode: .continuousAutoFocus, exposureMode: .continuousAutoExposure, atPoint: devicePoint, shouldMonitorSubjectAreaChange: false)
   }
 }

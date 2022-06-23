@@ -10,11 +10,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CaptureViewController" customModule="CustomCamera" customModuleProvider="target">
             <connections>
+                <outlet property="alertView" destination="Upl-Ew-cyw" id="az7-kw-091"/>
                 <outlet property="overlayView" destination="eXU-ia-0YU" id="XQ9-8r-zej"/>
                 <outlet property="recordView" destination="2C2-da-3wx" id="Gcg-m2-5MI"/>
                 <outlet property="switchZoomView" destination="Y9H-0Y-Gud" id="Fnp-Bw-Jfg"/>
                 <outlet property="timerView" destination="Y0b-8P-ndP" id="VH4-dt-gGC"/>
                 <outlet property="toggleCameraView" destination="q1v-tR-BFS" id="wXS-ZE-Qza"/>
+                <outlet property="torchView" destination="T2A-Kw-Ist" id="AOH-gH-2bS"/>
                 <outlet property="videoPreviewView" destination="1wU-Al-dQF" id="0Mg-3g-IPc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="visualEffectView" destination="4y7-J3-ahW" id="wTv-j2-MyD"/>
@@ -58,6 +60,22 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T2A-Kw-Ist" userLabel="Torch View" customClass="TorchView" customModule="CustomCamera" customModuleProvider="target">
+                    <rect key="frame" x="30" y="74" width="60" height="60"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="7eo-uH-xbG"/>
+                        <constraint firstAttribute="height" constant="60" id="tPl-SJ-mdk"/>
+                    </constraints>
+                </view>
+                <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Upl-Ew-cyw" userLabel="Alert View" customClass="AlertView" customModule="CustomCamera" customModuleProvider="target">
+                    <rect key="frame" x="107" y="572" width="200" height="60"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" placeholder="YES" id="EHm-xe-qat"/>
+                        <constraint firstAttribute="width" constant="200" placeholder="YES" id="wPV-Uk-CL1"/>
+                    </constraints>
+                </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y9H-0Y-Gud" userLabel="Switch Zoom View" customClass="SwitchZoomView" customModule="CustomCamera" customModuleProvider="target">
                     <rect key="frame" x="127" y="662" width="160" height="60"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -88,6 +106,7 @@
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="4y7-J3-ahW" secondAttribute="bottom" id="04J-Bb-NXc"/>
                 <constraint firstItem="4y7-J3-ahW" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="2Oj-4j-zev"/>
+                <constraint firstItem="Y9H-0Y-Gud" firstAttribute="top" secondItem="Upl-Ew-cyw" secondAttribute="bottom" constant="30" id="GCK-1e-jb5"/>
                 <constraint firstItem="Y9H-0Y-Gud" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" placeholder="YES" id="JX2-Mj-qCd"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="4y7-J3-ahW" secondAttribute="trailing" id="KDy-fg-hDq"/>
                 <constraint firstItem="eXU-ia-0YU" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="KSt-lC-lsf"/>
@@ -96,6 +115,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="q1v-tR-BFS" secondAttribute="trailing" constant="30" placeholder="YES" id="YIk-1w-u0U"/>
                 <constraint firstItem="1wU-Al-dQF" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="cEL-eU-Rfd"/>
                 <constraint firstItem="1wU-Al-dQF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="cWB-CM-Y9b"/>
+                <constraint firstItem="T2A-Kw-Ist" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="dgP-B8-zc9"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="eXU-ia-0YU" secondAttribute="bottom" id="hci-hI-MZa"/>
                 <constraint firstItem="4y7-J3-ahW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="jEW-1f-ucC"/>
                 <constraint firstItem="Y0b-8P-ndP" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="n1f-UD-ut9"/>
@@ -103,8 +123,10 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="2C2-da-3wx" secondAttribute="bottom" constant="30" placeholder="YES" id="pxH-WY-xkD"/>
                 <constraint firstItem="2C2-da-3wx" firstAttribute="top" secondItem="Y9H-0Y-Gud" secondAttribute="bottom" constant="30" placeholder="YES" id="qUT-zg-7TQ"/>
                 <constraint firstItem="eXU-ia-0YU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="sdA-pV-sBn"/>
+                <constraint firstItem="T2A-Kw-Ist" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="wDR-Xa-CYe"/>
                 <constraint firstItem="2C2-da-3wx" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" placeholder="YES" id="wJ6-Zv-NIV"/>
                 <constraint firstItem="Y0b-8P-ndP" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="woo-qP-q8K"/>
+                <constraint firstItem="Upl-Ew-cyw" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="xXY-u2-nE6"/>
                 <constraint firstItem="2C2-da-3wx" firstAttribute="centerY" secondItem="q1v-tR-BFS" secondAttribute="centerY" placeholder="YES" id="zlB-Iz-NqA"/>
             </constraints>
             <point key="canvasLocation" x="132" y="132"/>
