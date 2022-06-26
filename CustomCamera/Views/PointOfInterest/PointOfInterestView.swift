@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PointOfInterestView: UIView {
+final class PointOfInterestView: UIView {
 
   @IBOutlet private weak var contentView: UIView!
   
