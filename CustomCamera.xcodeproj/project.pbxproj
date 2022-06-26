@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		00004756285F396900F97179 /* ToggleCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00004755285F396900F97179 /* ToggleCameraView.swift */; };
 		00004758285F397500F97179 /* ToggleCameraView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00004757285F397500F97179 /* ToggleCameraView.xib */; };
+		00212BD0286853500052488C /* PointOfInterestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00212BCF286853500052488C /* PointOfInterestView.swift */; };
+		00212BD22868535B0052488C /* PointOfInterestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00212BD12868535B0052488C /* PointOfInterestView.xib */; };
 		0086C5FE285F1729001E6098 /* UIColor+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086C5FD285F1729001E6098 /* UIColor+Colors.swift */; };
 		0086C601285F1822001E6098 /* SwitchZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086C600285F1822001E6098 /* SwitchZoomView.swift */; };
 		0086C603285F182F001E6098 /* SwitchZoomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0086C602285F182F001E6098 /* SwitchZoomView.xib */; };
@@ -52,6 +54,8 @@
 /* Begin PBXFileReference section */
 		00004755285F396900F97179 /* ToggleCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleCameraView.swift; sourceTree = "<group>"; };
 		00004757285F397500F97179 /* ToggleCameraView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToggleCameraView.xib; sourceTree = "<group>"; };
+		00212BCF286853500052488C /* PointOfInterestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointOfInterestView.swift; sourceTree = "<group>"; };
+		00212BD12868535B0052488C /* PointOfInterestView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PointOfInterestView.xib; sourceTree = "<group>"; };
 		0086C5FD285F1729001E6098 /* UIColor+Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Colors.swift"; sourceTree = "<group>"; };
 		0086C600285F1822001E6098 /* SwitchZoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchZoomView.swift; sourceTree = "<group>"; };
 		0086C602285F182F001E6098 /* SwitchZoomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchZoomView.xib; sourceTree = "<group>"; };
@@ -112,6 +116,15 @@
 				00004757285F397500F97179 /* ToggleCameraView.xib */,
 			);
 			path = ToggleCamera;
+			sourceTree = "<group>";
+		};
+		00212BCE286853390052488C /* PointOfInterest */ = {
+			isa = PBXGroup;
+			children = (
+				00212BCF286853500052488C /* PointOfInterestView.swift */,
+				00212BD12868535B0052488C /* PointOfInterestView.xib */,
+			);
+			path = PointOfInterest;
 			sourceTree = "<group>";
 		};
 		0086C5FF285F1803001E6098 /* SwitchZoom */ = {
@@ -292,6 +305,7 @@
 		00F8BB09285733B600C5FF8F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				00212BCE286853390052488C /* PointOfInterest */,
 				00C1957F28648207002E0FC9 /* Torch */,
 				00C1957A28647DF7002E0FC9 /* Alert */,
 				00DDB803285C7F820045C9F1 /* RecordView */,
@@ -427,6 +441,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00212BD22868535B0052488C /* PointOfInterestView.xib in Resources */,
 				00F8BAFB2857323E00C5FF8F /* LaunchScreen.storyboard in Resources */,
 				00DDB802285C7CBD0045C9F1 /* TimerView.xib in Resources */,
 				00DDB7E6285B39E90045C9F1 /* RequestPhotoLibraryAuthorisationView.xib in Resources */,
@@ -472,6 +487,7 @@
 				00DDB7E4285B39D80045C9F1 /* RequestPhotoLibraryAuthorisationView.swift in Sources */,
 				00C1958128648214002E0FC9 /* TorchView.swift in Sources */,
 				00F8BB1428573A7A00C5FF8F /* CameraAuthorisationManager.swift in Sources */,
+				00212BD0286853500052488C /* PointOfInterestView.swift in Sources */,
 				00F8BB1728574D2F00C5FF8F /* RequestMicrophoneAuthorisationView.swift in Sources */,
 				0086C5FE285F1729001E6098 /* UIColor+Colors.swift in Sources */,
 				00DDB7EC285B3DF10045C9F1 /* UIView+Animations.swift in Sources */,

@@ -18,6 +18,7 @@ final class CaptureViewController: UIViewController {
   @IBOutlet private weak var switchZoomView: SwitchZoomView!
   @IBOutlet private weak var toggleCameraView: ToggleCameraView!
   @IBOutlet private weak var recordView: RecordView!
+  @IBOutlet private weak var pointOfInterestView: PointOfInterestView!
   
   private var captureSessionManager = CaptureSessionManager()
   
@@ -32,6 +33,9 @@ final class CaptureViewController: UIViewController {
   private var shouldHideSwitchZoomView = false
   
   private var hideAlertViewWorkItem: DispatchWorkItem?
+  
+  private var pointOfInterestHalfCompletedWorkItem: DispatchWorkItem?
+  private var pointOfInterestCompletedWorkItem: DispatchWorkItem?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -89,9 +93,12 @@ final class CaptureViewController: UIViewController {
     
     // give us the tapped area
     // get tap location and send it as the focus point
-    let tapView = tapGestureRecognizer.view
+    guard let tapView = tapGestureRecognizer.view else { return }
     
     let tapLocation = tapGestureRecognizer.location(in: tapView)
+    
+    let newLocation = tapView.convert(tapLocation, to: view)
+    showPointOfInterestView(atPoint: newLocation)
     
     let devicePoint = videoPreviewView.videoPreviewLayer.captureDevicePointConverted(fromLayerPoint: tapLocation)
     
@@ -328,6 +335,47 @@ private extension CaptureViewController {
   
   func setupTorchView() {
     torchView.delegate = self
+  }
+  
+  func showPointOfInterestView(atPoint point: CGPoint) {
+    // cancel any scheduled work
+    pointOfInterestHalfCompletedWorkItem = nil
+    pointOfInterestCompletedWorkItem = nil
+    
+    pointOfInterestView.center = point
+    pointOfInterestView.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+    
+    let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
+      self.pointOfInterestView.transform = .identity
+      self.pointOfInterestView.alpha = 1
+    }
+    
+    animation.startAnimation()
+    
+    let pointOfInterestHalfCompletedWorkItem = DispatchWorkItem { [weak self] in
+      guard let self = self else { return }
+      
+      let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
+        self.pointOfInterestView.alpha = 0.5
+      }
+      animation.startAnimation()
+    }
+    
+    let pointOfInterestCompletedWorkItem = DispatchWorkItem { [weak self] in
+      guard let self = self else { return }
+      
+      let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
+        self.pointOfInterestView.alpha = 0
+      }
+      animation.startAnimation()
+    }
+    
+    DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: pointOfInterestHalfCompletedWorkItem)
+    DispatchQueue.main.asyncAfter(deadline: .now() + 4, execute: pointOfInterestCompletedWorkItem)
+    
+    // keep a reference before exit
+    self.pointOfInterestHalfCompletedWorkItem = pointOfInterestHalfCompletedWorkItem
+    self.pointOfInterestCompletedWorkItem = pointOfInterestCompletedWorkItem
   }
 }
 

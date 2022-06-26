@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="alertView" destination="Upl-Ew-cyw" id="az7-kw-091"/>
                 <outlet property="overlayView" destination="eXU-ia-0YU" id="XQ9-8r-zej"/>
+                <outlet property="pointOfInterestView" destination="aAB-S9-0Ya" id="PSV-Ad-Qzz"/>
                 <outlet property="recordView" destination="2C2-da-3wx" id="Gcg-m2-5MI"/>
                 <outlet property="switchZoomView" destination="Y9H-0Y-Gud" id="Fnp-Bw-Jfg"/>
                 <outlet property="timerView" destination="Y0b-8P-ndP" id="VH4-dt-gGC"/>
@@ -100,14 +101,24 @@
                         <constraint firstAttribute="height" constant="80" id="Wc5-lS-eKF"/>
                     </constraints>
                 </view>
+                <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aAB-S9-0Ya" userLabel="Point Of Interest View" customClass="PointOfInterestView" customModule="CustomCamera" customModuleProvider="target">
+                    <rect key="frame" x="167" y="408" width="80" height="80"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="GX7-8J-Goo"/>
+                        <constraint firstAttribute="height" constant="80" id="hgg-TL-3xd"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="4y7-J3-ahW" secondAttribute="bottom" id="04J-Bb-NXc"/>
                 <constraint firstItem="4y7-J3-ahW" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="2Oj-4j-zev"/>
+                <constraint firstItem="aAB-S9-0Ya" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" placeholder="YES" id="AEr-8Y-CqW"/>
                 <constraint firstItem="Y9H-0Y-Gud" firstAttribute="top" secondItem="Upl-Ew-cyw" secondAttribute="bottom" constant="30" id="GCK-1e-jb5"/>
                 <constraint firstItem="Y9H-0Y-Gud" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" placeholder="YES" id="JX2-Mj-qCd"/>
+                <constraint firstItem="aAB-S9-0Ya" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" placeholder="YES" id="Jba-8v-lCg"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="4y7-J3-ahW" secondAttribute="trailing" id="KDy-fg-hDq"/>
                 <constraint firstItem="eXU-ia-0YU" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="KSt-lC-lsf"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="1wU-Al-dQF" secondAttribute="trailing" id="LtS-iY-omZ"/>
