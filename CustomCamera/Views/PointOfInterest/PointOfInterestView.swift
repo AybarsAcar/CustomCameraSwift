@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// the Square View that is displayed when camera focus tap action
 final class PointOfInterestView: UIView {
 
   @IBOutlet private weak var contentView: UIView!
