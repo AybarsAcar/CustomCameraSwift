@@ -19,7 +19,14 @@ enum CameraPosition {
 typealias CaptureSessionInitialisedCompletionHandler = () -> Void
 typealias CaptureSessionToggleCompletionHandler = (_ cameraPosition: CameraPosition) -> Void
 
+protocol CaptureSessionManagerDelegate: AnyObject {
+  func captureSessionManagerDidFinishRecording(_ captureSessionManager: CaptureSessionManager, outputFileURL: URL)
+  func captureSessionManagerFailedFinishingRecording(_ captureSessionManager: CaptureSessionManager)
+}
+
 final class CaptureSessionManager: NSObject {
+  
+  weak var delegate: CaptureSessionManagerDelegate?
   
   private lazy var captureSession = AVCaptureSession()
   
@@ -31,6 +38,8 @@ final class CaptureSessionManager: NSObject {
   private var cameraPosition: CameraPosition = .back
   
   private var previousZoomState: ZoomState = .wide
+  
+  private var movieFileOutput: AVCaptureMovieFileOutput?
   
   override init() {
     super.init()
@@ -138,6 +147,25 @@ final class CaptureSessionManager: NSObject {
     
     captureSession.addInput(captureDeviceInput)
     
+    let movieFileOutput = AVCaptureMovieFileOutput()
+    guard captureSession.canAddOutput(movieFileOutput) else {
+      return
+    }
+    
+    captureSession.beginConfiguration()
+    captureSession.addOutput(movieFileOutput)
+    captureSession.sessionPreset = .high
+    
+    if let connection = movieFileOutput.connection(with: .video),
+       connection.isVideoStabilizationSupported {
+      
+      connection.preferredVideoStabilizationMode = .auto
+    }
+    
+    captureSession.commitConfiguration()
+    
+    self.movieFileOutput = movieFileOutput
+    
     captureSession.startRunning()
     
     setVideoZoomFactor()
@@ -199,6 +227,53 @@ final class CaptureSessionManager: NSObject {
   
   func turnOffTorch() -> Bool {
     return setTorchMode(to: .off)
+  }
+  
+  func startRecording() {
+    guard let movieFileOutput = movieFileOutput else {
+      return
+    }
+
+    guard let interfaceOrientation = AppSetup.shared.interfaceOrientation,
+          let videoOrientation = VideoOrientationManager.shared.getVideoOrientation(from: interfaceOrientation) else {
+      return
+    }
+    
+    let movieFileOutputConnection = movieFileOutput.connection(with: .video)
+    movieFileOutputConnection?.videoOrientation = videoOrientation
+    
+    // check what video codec types that are available to us
+    let availableVideoCodecTypes = movieFileOutput.availableVideoCodecTypes
+    
+    if availableVideoCodecTypes.contains(.hevc) {
+      movieFileOutput.setOutputSettings([AVVideoCodecKey: AVVideoCodecType.hevc], for: movieFileOutputConnection!)
+    }
+    
+    let outputFileName = UUID().uuidString
+    let outputFilePath = (NSTemporaryDirectory() as NSString)
+      .appendingPathComponent((outputFileName as NSString)
+        .appendingPathExtension("mov")!
+      )
+    
+    let outputURL = URL(fileURLWithPath: outputFilePath)
+    
+    movieFileOutput.startRecording(to: outputURL, recordingDelegate: self)
+  }
+  
+  func stopRecording() {
+    guard let movieFileOutput = movieFileOutput else {
+      return
+    }
+
+    movieFileOutput.stopRecording()
+  }
+  
+  var isRecording: Bool {
+    guard let movieFileOutput = movieFileOutput else {
+      return false
+    }
+
+    return movieFileOutput.isRecording
   }
 }
 
@@ -346,5 +421,39 @@ private extension CaptureSessionManager {
     let devicePoint = CGPoint(x: 0.5, y: 0.5)
     
     setFocus(focusMode: .continuousAutoFocus, exposureMode: .continuousAutoExposure, atPoint: devicePoint, shouldMonitorSubjectAreaChange: false)
+  }
+}
+
+extension CaptureSessionManager: AVCaptureFileOutputRecordingDelegate {
+  
+  func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
+    
+    var success = true
+    
+    if let error = error as? NSError {
+      success = (error.userInfo[AVErrorRecordingSuccessfullyFinishedKey] as AnyObject).boolValue
+    }
+    
+    if success {
+      delegate?.captureSessionManagerDidFinishRecording(self, outputFileURL: outputFileURL)
+    }
+    else {
+      delegate?.captureSessionManagerFailedFinishingRecording(self)
+      cleanUp(outputFileURL)
+    }
+  }
+  
+  func cleanUp(_ outputFileURL: URL) {
+    let path = outputFileURL.path
+    
+    guard FileManager.default.fileExists(atPath: path) else {
+      return
+    }
+    
+    do {
+      try FileManager.default.removeItem(atPath: path)
+    } catch {
+      print("Could not remove file at url: \(outputFileURL)")
+    }
   }
 }

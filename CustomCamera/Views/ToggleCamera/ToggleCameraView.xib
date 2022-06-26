@@ -27,7 +27,7 @@
                     </constraints>
                     <color key="tintColor" name="TextOnBackgroundAlpha"/>
                     <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" image="arrow.2.circlepath" catalog="system"/>
+                    <buttonConfiguration key="configuration" style="plain" image="arrow.triangle.2.circlepath" catalog="system"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                             <integer key="value" value="20"/>
@@ -51,7 +51,7 @@
         </view>
     </objects>
     <resources>
-        <image name="arrow.2.circlepath" catalog="system" width="128" height="101"/>
+        <image name="arrow.triangle.2.circlepath" catalog="system" width="128" height="101"/>
         <namedColor name="BackgroundAlpha60">
             <color red="0.0" green="0.0" blue="0.0" alpha="0.60000002384185791" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

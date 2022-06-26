@@ -25,10 +25,12 @@ final class AppSetup {
   }
   
   var keyWindow: UIWindow? {
-    return UIApplication.shared.windows.first(where: { $0.isKeyWindow })
+    let firstScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+    return firstScene?.windows.first(where: { $0.isKeyWindow })
   }
   
   var interfaceOrientation: UIInterfaceOrientation? {
-    return UIApplication.shared.windows.first?.windowScene?.interfaceOrientation
+    let firstScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+    return firstScene?.interfaceOrientation
   }
 }

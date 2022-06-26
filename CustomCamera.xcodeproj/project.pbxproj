@@ -11,6 +11,7 @@
 		00004758285F397500F97179 /* ToggleCameraView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00004757285F397500F97179 /* ToggleCameraView.xib */; };
 		00212BD0286853500052488C /* PointOfInterestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00212BCF286853500052488C /* PointOfInterestView.swift */; };
 		00212BD22868535B0052488C /* PointOfInterestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00212BD12868535B0052488C /* PointOfInterestView.xib */; };
+		00212BD528686A050052488C /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00212BD428686A050052488C /* VideoPlayerViewController.swift */; };
 		0086C5FE285F1729001E6098 /* UIColor+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086C5FD285F1729001E6098 /* UIColor+Colors.swift */; };
 		0086C601285F1822001E6098 /* SwitchZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086C600285F1822001E6098 /* SwitchZoomView.swift */; };
 		0086C603285F182F001E6098 /* SwitchZoomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0086C602285F182F001E6098 /* SwitchZoomView.xib */; };
@@ -56,6 +57,7 @@
 		00004757285F397500F97179 /* ToggleCameraView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToggleCameraView.xib; sourceTree = "<group>"; };
 		00212BCF286853500052488C /* PointOfInterestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointOfInterestView.swift; sourceTree = "<group>"; };
 		00212BD12868535B0052488C /* PointOfInterestView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PointOfInterestView.xib; sourceTree = "<group>"; };
+		00212BD428686A050052488C /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
 		0086C5FD285F1729001E6098 /* UIColor+Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Colors.swift"; sourceTree = "<group>"; };
 		0086C600285F1822001E6098 /* SwitchZoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchZoomView.swift; sourceTree = "<group>"; };
 		0086C602285F182F001E6098 /* SwitchZoomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchZoomView.xib; sourceTree = "<group>"; };
@@ -125,6 +127,14 @@
 				00212BD12868535B0052488C /* PointOfInterestView.xib */,
 			);
 			path = PointOfInterest;
+			sourceTree = "<group>";
+		};
+		00212BD3286869DF0052488C /* VideoPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				00212BD428686A050052488C /* VideoPlayerViewController.swift */,
+			);
+			path = VideoPlayer;
 			sourceTree = "<group>";
 		};
 		0086C5FF285F1803001E6098 /* SwitchZoom */ = {
@@ -278,6 +288,7 @@
 		00F8BB022857329F00C5FF8F /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				00212BD3286869DF0052488C /* VideoPlayer */,
 				00DDB7F0285B43600045C9F1 /* Capture */,
 				00F8BB04285732B200C5FF8F /* Launch */,
 				00F8BB03285732A400C5FF8F /* ViewController */,
@@ -483,6 +494,7 @@
 				00F8BB07285732DD00C5FF8F /* LaunchViewController.swift in Sources */,
 				00DDB7FD285B48B30045C9F1 /* CaptureSessionManager.swift in Sources */,
 				00DDB7FA285B45DB0045C9F1 /* VideoPreviewView.swift in Sources */,
+				00212BD528686A050052488C /* VideoPlayerViewController.swift in Sources */,
 				00DDB7F3285B43770045C9F1 /* CaptureViewController.swift in Sources */,
 				00DDB7E4285B39D80045C9F1 /* RequestPhotoLibraryAuthorisationView.swift in Sources */,
 				00C1958128648214002E0FC9 /* TorchView.swift in Sources */,

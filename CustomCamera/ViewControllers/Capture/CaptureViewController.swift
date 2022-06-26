@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVKit
 
 final class CaptureViewController: UIViewController {
   
@@ -37,8 +38,12 @@ final class CaptureViewController: UIViewController {
   private var pointOfInterestHalfCompletedWorkItem: DispatchWorkItem?
   private var pointOfInterestCompletedWorkItem: DispatchWorkItem?
   
+  private var movieOutputFileURL: URL?
+  
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    setupRecordView()
     
     setupTorchView()
     
@@ -103,6 +108,11 @@ final class CaptureViewController: UIViewController {
     let devicePoint = videoPreviewView.videoPreviewLayer.captureDevicePointConverted(fromLayerPoint: tapLocation)
     
     captureSessionManager.setFocus(focusMode: .autoFocus, exposureMode: .autoExpose, atPoint: devicePoint, shouldMonitorSubjectAreaChange: true)
+  }
+  
+  /// tells whether the view should auto rotate
+  override var shouldAutorotate: Bool {
+    return !captureSessionManager.isRecording
   }
 }
 
@@ -179,6 +189,7 @@ private extension CaptureViewController {
   func hideViewsBeforeOrientationChange() {
     recordView.alpha = 0
     switchZoomView.alpha = 0
+    hidePointOfInterestView()
   }
   
   func showViewsAfterOrientationChange() {
@@ -218,6 +229,8 @@ private extension CaptureViewController {
   }
   
   func setupCaptureSessionManager() {
+    captureSessionManager.delegate = self
+    
     captureSessionManager.initialiseCaptureSession { [weak self] in
       guard let self = self else {
         return
@@ -377,6 +390,47 @@ private extension CaptureViewController {
     self.pointOfInterestHalfCompletedWorkItem = pointOfInterestHalfCompletedWorkItem
     self.pointOfInterestCompletedWorkItem = pointOfInterestCompletedWorkItem
   }
+  
+  func hidePointOfInterestView() {
+    pointOfInterestHalfCompletedWorkItem?.cancel()
+    pointOfInterestCompletedWorkItem?.cancel()
+    pointOfInterestHalfCompletedWorkItem = nil
+    pointOfInterestCompletedWorkItem = nil
+    
+    pointOfInterestView.alpha = 0
+  }
+  
+  func showTimerView() {
+    timerView.isHidden = false
+  }
+  
+  func hideTimerView() {
+    timerView.isHidden = true
+  }
+  
+  func resetTimer() {
+    timerManager.resetTimer()
+  }
+  
+  func setupRecordView() {
+    recordView.delegate = self
+  }
+}
+
+extension CaptureViewController: RecordViewDelegate {
+  
+  func recordViewStartRecording(_ recordView: RecordView) {
+    showTimerView()
+    setupTimer()
+    captureSessionManager.startRecording()
+  }
+  
+  func recordViewEndRecording(_ recordView: RecordView) {
+    hideTimerView()
+    resetTimer()
+    captureSessionManager.stopRecording()
+  }
+  
 }
 
 extension CaptureViewController: TorchViewDelegate {
@@ -387,7 +441,7 @@ extension CaptureViewController: TorchViewDelegate {
       let result = captureSessionManager.turnOnTorch()
       
       if !result {
-      showAlertView(text: "Could not turn on torch")
+        showAlertView(text: "Could not turn on torch")
       }
       
       completion(result)
@@ -407,6 +461,7 @@ extension CaptureViewController: TorchViewDelegate {
 extension CaptureViewController: SwitchZoomViewDelegate {
   
   func switchZoomTapped(state: ZoomState) {
+    hidePointOfInterestView()
     captureSessionManager.setZoomState(state)
   }
 }
@@ -414,6 +469,9 @@ extension CaptureViewController: SwitchZoomViewDelegate {
 extension CaptureViewController: ToggleCameraViewDelegate {
   
   func toggleCameraTapped() {
+    
+    hidePointOfInterestView()
+    
     captureSessionManager.toggleCamera { [weak self] cameraPosition in
       
       guard let self = self else { return }
@@ -433,3 +491,35 @@ extension CaptureViewController: ToggleCameraViewDelegate {
   }
 }
 
+extension CaptureViewController: CaptureSessionManagerDelegate {
+  
+  func captureSessionManagerDidFinishRecording(_ captureSessionManager: CaptureSessionManager, outputFileURL: URL) {
+    
+    movieOutputFileURL = outputFileURL
+    
+    let player = AVPlayer(url: outputFileURL)
+    
+    let videoPlayerVC = VideoPlayerViewController()
+    videoPlayerVC.player = player
+    videoPlayerVC.videoPlayerViewControllerDelegate = self
+    
+    present(videoPlayerVC, animated: true) {
+      player.play()
+    }
+  }
+  
+  func captureSessionManagerFailedFinishingRecording(_ captureSessionManager: CaptureSessionManager) {
+    print("Failed to finish recording")
+  }
+}
+
+extension CaptureViewController: VideoPlayerViewControllerDelegate {
+  
+  func videoPlayerViewControllerDismissed(_ videoPlayerViewController: VideoPlayerViewController) {
+    guard let movieOutputFileURL = movieOutputFileURL else {
+      return
+    }
+    
+    captureSessionManager.cleanUp(movieOutputFileURL)
+  }
+}
